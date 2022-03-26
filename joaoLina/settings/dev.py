@@ -12,3 +12,8 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+# PESO PÔR KILO ==== PASSAR PARA O HEROKU QUANDO ESTIVER ON
+SHIPPING_PRICE = 3

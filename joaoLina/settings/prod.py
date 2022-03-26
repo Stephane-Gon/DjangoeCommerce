@@ -32,6 +32,10 @@ STATICFILES_STORAGE = 'joaoLina.storage_backend.StaticStorage'
 DEFAULT_FILE_STORAGE = 'joaoLina.storage_backend.MediaStorage'
 MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, 'media')
 
+
+# PESO PÔR KILO ==== PASSAR PARA O HEROKU QUANDO ESTIVER ON
+SHIPPING_PRICE = config('LINA_SHIPPING_PRICE')
+
 # HEROKU LOGGING
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
