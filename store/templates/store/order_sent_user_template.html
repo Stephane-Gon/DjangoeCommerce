@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your order was sent!</title>
+    <style>
+        strong, h3, h2, h1 {
+            color: #C19770;
+        }
+        h1 {
+            font-style: italic;
+        }
+        hr {
+            color: #644936;
+            background-color: #644936;
+            border-width:0;
+            height: 1px;
+        }
+        .thick-ruller {
+            height: 2px;
+        }
+        a {
+            color: #D5B895;
+        }
+        .flex-div{
+            display: flex;
+            justify-content: space-between;
+        }
+        .logo-div {
+            width: 75%;
+        }
+        .inner-div {
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-div">
+        <div class="logo-div">
+            <h1><a href="http://127.0.0.1:8000/">JoaoLina.com</a></h1>
+        </div>
+        <div class="inner_div">
+            <h2>Order Confirmation</h2>
+            <p><strong>Order:</strong>#{{ order.id }}</p>
+        </div>
+    </div>
+
+    <p>
+        <strong>Hello</strong>, {{ user.username }}, we would like to inform you that your order is on its way and can no longer be changed.
+        If you need a refund or to return an item, visit this <a href="http://127.0.0.1:8000/order_details/{{ order.slug }}/">order</a> page in our website.
+    </p>
+
+    <h3>Your order was sent to:</h3>
+    <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+
+    <p>
+        {{ order.shipping_address.street_address }} {{ order.shipping_address.apartment_address }}
+        {{ order.shipping_address.city }}
+        {% if order.shipping_address.state %}
+        , {{ order.shipping_address.state }}
+        {% endif %}
+    </p>
+
+    <hr class="thick-ruller">
+    <h3>Items Summary:</h3>
+    <div>
+        {% for item in items %}
+            <p>
+                You ordered {{ item.quantity }} <strong> <a href="http://127.0.0.1:8000{{ item.item.get_absolute_url }}">{{ item.item.title }}</a></strong>
+                for {{ item.old_price }}€ each, wich gave a total of {{ item.get_old_total_price }}€.
+            </p>
+            {% if item.replica %}
+               <b>This item is a replica.</b> 
+            {% endif %}
+            <hr>
+        {% endfor %}    
+    </div>
+
+    <hr class="thick-ruller">
+    <h3>Order Summary:</h3> 
+    <p>You payed <strong>{{ order.get_old_total_shipping|floatformat:2 }}€</strong> from shipping.</p>
+    <p>And payed <strong>{{ order.get_old_cart_subTotal }}€</strong>(this value includes the discounts if there was any) for the items.</p>
+    <p> Your order was a total of <strong>{{ order.get_old_cart_total|floatformat:2 }}€</strong>.</p>
+
+    <hr class="thick-ruller">
+    <h3>I hope we will se you again.</h3>
+    <h1>JoaoLina.com</h1>
+    
+</body>
+</html>

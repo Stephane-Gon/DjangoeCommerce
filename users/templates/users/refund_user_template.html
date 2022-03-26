@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your order was sent!</title>
+    <style>
+        strong, h3, h2, h1 {
+            color: #C19770;
+        }
+        h1 {
+            font-style: italic;
+        }
+        hr {
+            color: #644936;
+            background-color: #644936;
+            border-width:0;
+            height: 1px;
+        }
+        .thick-ruller {
+            height: 2px;
+        }
+        a {
+            color: #D5B895;
+        }
+        .flex-div{
+            display: flex;
+            justify-content: space-between;
+        }
+        .logo-div {
+            width: 75%;
+        }
+        .inner-div {
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-div">
+        <div class="logo-div">
+            <h1><a href="http://127.0.0.1:8000/">JoaoLina.com</a></h1>
+        </div>
+        <div class="inner_div">
+            {% if refund.quantity > 1 %}
+            <h2>Refund Items</h2>
+            {% else %}
+            <h2>Refund Item</h2>
+            {% endif %}
+            <p><strong>Order:</strong>#{{ refund.order.id }}</p>
+            <p><strong>Order Item:</strong>#{{ refund.item.id }}</p>
+
+        </div>
+    </div>
+
+    <p>
+        <strong>Hello</strong>, {{ user.username }}, we would like to inform you that your refund is being processed.
+        If you want to cancel the refund, visit this <a href="http://127.0.0.1:8000/order_details/{{ refund.order.slug }}/">order</a> at our website.
+    </p>
+
+    <hr class="thick-ruller">
+    <h3>Refund warnings:</h3> 
+    <p><b>1º </b>Keep in mind that we will only refund you the value of the product and not the shipping.</p>
+    <p><b>2º </b>Keep in mind that we will only transfer the value once the product has arrived our facilities.</p>
+    <p><b>3ª </b>Keep in mind that you have to specify an acceptable reason.</p>
+    <p><b>4ª </b>Keep in mind that we will transfer the value to the account you made the payment.</p>
+    <p><b>5ª </b>Keep in mind that the items must be in good shape before returning them.</p>
+    <p>
+        <b>5ª</b>
+        If you want to refund more than 1 of the same item, just send them together 
+        and we will refund you the value of the item * the quantity.
+    </p>
+
+    <hr class="thick-ruller">
+    <h3>To procced with the refund make sure to send the products <b>well wrapped</b> to the following address:</h3>
+    
+    <p><b>Street Address:</b>Rua João Rodrigues Morais, Centro Comercial Iberico</p>
+    <p><b>Door number:</b>20-B</p>
+    <p><b>Zip-Code:</b>4990-121</p>
+    <p><b>City:</b>Ponte de Lima, Viana do Castelo</p>
+    <p><b>Country:</b>Portugal</p>
+
+
+    <hr class="thick-ruller">
+    <h3>Reason to refund:</h3>
+    <p>{{ refund.reason }}</p>
+
+    <hr class="thick-ruller">
+    {% if refund.quantity > 1 %}
+    <h3>Items to refund:</h3>
+    {% else %}
+    <h3>Item to refund:</h3>
+    {% endif %}
+    <div>
+        <p>
+            You want to refund <b>{{ refund.quantity }}</b> copies of the item: <strong> <a href="http://127.0.0.1:8000{{ refund.item.item.get_absolute_url }}">{{ refund.item.item.title }}</a></strong>
+            for {{ refund.item.old_price }}€ each.
+        </p>
+        <hr>   
+    </div>
+
+
+    <hr class="thick-ruller">
+    <h3>I hope we will se you again.</h3>
+    <h1>JoaoLina.com</h1>
+    
+</body>
+</html>

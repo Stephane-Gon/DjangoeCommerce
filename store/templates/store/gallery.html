@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Gallery
+{% endblock %}
+
+{% block content %}
+
+{% csrf_token %}
+
+<div class="gallery-img-wrapper">
+    {% if testImg %}
+        {% for img in testImg %}
+        <li>
+            <img src="{{ img.image.url }}" alt=" {{ img.image }}">
+            <h1 class="gallery-heading">{{ img.item }}</h1>
+        </li>
+        {% endfor %}
+    {% else %}
+        <h1 class="mainHeading">There are no images at the moment.</h1>
+    {% endif %}
+</div>
+
+{% endblock %}

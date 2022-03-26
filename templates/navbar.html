@@ -1,0 +1,150 @@
+{% load static %}
+
+<!-- NORMAL NAVBAR -->
+{% if request.user.is_authenticated %}
+    <nav class="my-navBar main-nav">
+        <a class="navbar-brand" href="{% url 'store:home' %}">
+            <img src="{% static 'img/Logo1.svg' %}" alt="Logo" class="logo">
+            <img src="{% static 'img/LogoNome.svg' %}" alt="Logo Nome" class="logoName">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" hidden>
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="navbar-collapse" id="navbarNav">
+            <ul class="myNavLinks">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'store:categories' %}">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'store:contact' %}">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'store:about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{% url 'store:gallery' %}">Gallery</a>
+                </li>
+
+            </ul>
+
+            <div class="navIcons">
+                <a href="{% url 'user-account' %}"><i class="far fa-user nav-icon"></i></a>
+
+                <div class="verticalLine nav-icon"></div>
+
+                <a href="{% url 'store:cart' %}"><img class="navCartOff nav-icon" src="{% static 'img/CartOff.svg' %}" alt="Cart"></a>
+                <span id="cartItems">{{ cartItems }}</span>
+            </div>
+        </div>
+
+        <button class="myBtnPri navBtnUser">
+            <a class="mySecLink" href="{% url 'logout' %}">Log Out</a>
+        </button>
+    </nav>
+{% else %}
+    <nav class="my-navBar my-navBarNoUser main-nav">
+        <a class="navbar-brand" href="{% url 'store:home' %}">
+            <img src="{% static 'img/Logo1.svg' %}" alt="Logo" class="logo">
+            <img src="{% static 'img/LogoNome.svg' %}" alt="Logo Nome" class="logoName">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" hidden>
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="navbar-collapse" id="navbarNav">
+            <ul class="myNavLinks">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'store:categories' %}">Categories</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'store:contact' %}">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'store:about' %}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{% url 'store:gallery' %}">Gallery</a>
+                </li>
+
+            </ul>
+
+            <div class="navIcons">
+                <a href="{% url 'store:cart' %}"><img class="navCartOff nav-icon" src="{% static 'img/CartOff.svg' %}" alt="Cart"></a>
+                <span id="cartItems">{{ cartItems }}</span>
+            </div>
+        </div>
+
+        <div class="btnWrapperNoUser">
+            <div class="btnSecBack">
+                <button class="myBtnSec">
+                    <a class="mySecLink" href="{% url 'register' %}">Sign In</a>
+                </button>
+            </div>
+        
+            <button class="myBtnPri navBtnUser">
+                <a class="mySecLink" href="{% url 'login' %}">Log In</a>
+            </button>
+        </div>
+    </nav>
+{% endif %}
+
+<!-- BURGER MENU BUTTON -->
+<div class="menu-btn">
+    <div class="menu-btn__burger"></div>
+</div>
+
+<!-- SIDE NAV BAR -->
+<div class="side-menu-user my-navBar">
+
+    <a class="navbar-brand" href="{% url 'store:home' %}">
+        <img src="{% static 'img/Logo1.svg' %}" alt="Logo" class="logo">
+        <img src="{% static 'img/LogoNome.svg' %}" alt="Logo Nome" class="logoName">
+    </a>
+
+    <div class="navIcons">
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'user-account' %}"><i class="far fa-user nav-icon"></i></a>
+            <div class="verticalLine nav-icon"></div>
+        {% endif %}
+        <a href="{% url 'store:cart' %}"><img class="navCartOff nav-icon" src="{% static 'img/CartOff.svg' %}" alt="Cart"></a>
+        <span id="sideCartItems">{{ cartItems }}</span>
+    </div>
+
+    <ul class="myNavLinks">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'store:categories' %}">Categories</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'store:contact' %}">Contact</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'store:about' %}">About</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{% url 'store:gallery' %}">Gallery</a>
+        </li>
+    </ul>
+    {% if request.user.is_authenticated %}
+        <button class="myBtnPri side-nav-btn-user">
+            <a class="mySecLink" href="{% url 'logout' %}">Log Out</a>
+        </button>
+    {% else %}
+        <div class="btnWrapperNoUser">
+            <div class="btnSecBack">
+                <button class="myBtnSec">
+                    <a class="mySecLink" href="{% url 'register' %}">Sign In</a>
+                </button>
+            </div>
+        
+            <button class="myBtnPri navBtnUser">
+                <a class="mySecLink" href="{% url 'login' %}">Log In</a>
+            </button>
+        </div>
+    {% endif %}
+</div>
+    

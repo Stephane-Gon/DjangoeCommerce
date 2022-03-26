@@ -1,0 +1,24 @@
+{% load static %}
+
+<div class="my-footer">
+
+    <a class="footer-brand" href="{% url 'store:home' %}">
+        <img src="{% static 'img/Logo1.svg' %}" alt="Logo" class="logo">
+        <img src="{% static 'img/LogoNome.svg' %}" alt="Logo Nome" class="logoName">
+    </a>
+
+    <div class="btnSecBack">
+        <button class="myBtnSec">
+            <a href="{% url 'store:contact' %}">Contact</a>
+        </button>
+    </div>
+
+    <div class="footer-Icons">
+        <a target="_blank" href="https://www.facebook.com/Joaolina-102009792229641">
+            <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a target="_blank" href="https://www.instagram.com/joaolina.store/">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+</div>

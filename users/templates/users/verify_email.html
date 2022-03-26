@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Verify Email
+{% endblock %}
+
+{% block content %}
+    <div class="main-container">
+
+        <div class="user-wrapper">
+            <h3>{{ message }}</h3>
+            <p>If you haven't received any email click <a href="{% url 'resend-activate-account' uidb64=uidb64 token=token %}">here</a> so we can send another one.</p>
+        </div>
+    </div>
+   
+{% endblock %}

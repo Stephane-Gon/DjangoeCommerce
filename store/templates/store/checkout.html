@@ -1,0 +1,337 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Checkout: Shipping
+{% endblock %}
+
+
+{% block content %}
+<div class="checkout-container">
+
+    <!-- CHECKOUT NAV BAR -->
+    <div class="userAccountNav checkout-nav" id="checkoutNav">
+            
+        <div class="user-marker" id="marker"></div>
+        
+        <h2 class="userNavLink active-link" id="userInfoLink">Shipping</h2>
+        <h2 class="userNavLink" id="ordersInfoLink">Billing</h2>
+        <h2 class="userNavLink" id="updateInfoLink">Receipt</h2>
+    </div>
+
+    <!-- THIS IS THE SHIPPING CONTAINER PAGE -->
+    <div class="checkout-wrapper checkout-shi-wrapper">
+        <form action="{% url 'store:checkout' %}" method="POST" class="accountForm accountAddressForm">
+            {% csrf_token %}
+
+            <div class="form-group">
+                {% if sForm.street_address.errors %}
+                    <label for="{{sForm.street_address.id_for_label}}" class="myLabel required" itserror="True">Shipping Street Address</label>
+                    {{ sForm.street_address }}
+                    <div class="inputRuller inputRullerError"></div>
+                    {% for error in sForm.street_address.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                
+                {% else %}
+                    <label for="{{sForm.street_address.id_for_label}}" class="myLabel required">Shipping Street Address</label>
+                    {{ sForm.street_address }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{sForm.apartment_address.id_for_label}}" class="myLabel">Shipping Apartment Address</label>
+                {{ sForm.apartment_address }}
+                <div class="inputRuller"></div>
+            </div>
+
+            <div class="form-group">
+                {% if sForm.city.errors %}
+                    <label for="{{sForm.city.id_for_label}}" class="myLabel required" itserror="True">Shipping City</label>
+                    {{ sForm.city }}
+                    <div class="inputRuller inputRullerError"></div>
+                    {% for error in sForm.city.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{sForm.city.id_for_label}}" class="myLabel required">Shipping City</label>
+                    {{ sForm.city }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ sForm.state.id_for_label }}" class="myLabel">Shipping State</label>
+                {{ sForm.state }}
+                <div class="inputRuller"></div>
+            </div>
+
+            <div class="form-group">
+                {% if sForm.country.errors %}
+                    <label for="{{ sForm.country.id_for_label }}" class="myLabel required" itserror="True">Shipping Country</label>
+                    {{ sForm.country }}
+                    {% for error in sForm.country.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{ sForm.country.id_for_label }}" class="myLabel required">Shipping Country</label>
+                    {{ sForm.country }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {% if sForm.zip.errors %}
+                    <label for="{{ sForm.zip.id_for_label }}" class="myLabel required" itserror="True">Shipping Zip Code</label>
+                    {{ sForm.zip }}
+                    <div class="inputRuller inputRullerError"></div>
+                    {% for error in sForm.zip.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{ sForm.zip.id_for_label }}" class="myLabel required">Shipping Zip Code</label>
+                    {{ sForm.zip }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="btn-form-group btn-form-group-shi">
+                <button name="user-shipping-form" class="myBtnPri" id="shi-next">Add</button>
+            </div>
+
+
+        </form>
+
+        <form action="{% url 'store:checkout' %}" method="POST" class="accountForm accountAddressForm">
+            {% csrf_token %}
+
+            <div class="form-group">
+                {% if bForm.street_address.errors %}
+                    <label for="{{ bForm.street_address.id_for_label }}" class="myLabel required" itserror="True">Billing Street Address</label>
+                    {{ bForm.street_address }}
+                    <div class="inputRuller inputRullerError"></div>
+                    {% for error in bForm.street_address.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                
+                {% else %}
+                    <label for="{{ bForm.street_address.id_for_label }}" class="myLabel required">Billing Street Address</label>
+                    {{ bForm.street_address }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ bForm.apartment_address.id_for_label }}" class="myLabel">Billing Apartment Address</label>
+                {{ bForm.apartment_address }}
+                <div class="inputRuller"></div>
+            </div>
+
+            <div class="form-group">
+                {% if bForm.city.errors %}
+                    <label for="{{ bForm.city.id_for_label }}" class="myLabel required" itserror="True">Billing City</label>
+                    {{ bForm.city }}
+                    <div class="inputRuller inputRullerError"></div>
+                    {% for error in bForm.city.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{ bForm.city.id_for_label }}" class="myLabel required">Billing City</label>
+                    {{ bForm.city }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ bForm.state.id_for_label }}" class="myLabel">Billing State</label>
+                {{ bForm.state }}
+                <div class="inputRuller"></div>
+            </div>
+
+            <div class="form-group">
+                {% if bForm.country.errors %}
+                    <label for="{{ bForm.country.id_for_label }}" class="myLabel required" itserror="True">Billing Country</label>
+                    {{ bForm.country }}
+                    {% for error in bForm.country.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{ bForm.country.id_for_label }}" class="myLabel required">Billing Country</label>
+                    {{ bForm.country }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {% if bForm.zip.errors %}
+                    <label for="{{ bForm.zip.id_for_label }}" class="myLabel required" itserror="True">Billing Zip Code</label>
+                    {{ bForm.zip }}
+                    <div class="inputRuller inputRullerError"></div>
+                    {% for error in bForm.zip.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{ bForm.zip.id_for_label }}" class="myLabel required">Billing Zip Code</label>
+                    {{ bForm.zip }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="btn-form-group">
+                <div class="btnSecBack">
+                    <button class="myBtnSec">
+                        <a class="mySecLink" href="{% url 'store:cart' %}">Back to Cart</a>
+                    </button>
+                </div>
+
+                <button name="user-billing-form" class="myBtnPri" id="bi-next">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- THIS IS THE BILLING CONTAINER PAGE -->
+    <div class="checkout-wrapper checkout-bil-wrapper">
+        <div class="payments-wrapper">
+            <h1>Payments</h1>
+
+            <div id="paypal-button-container" class="paypal-div"></div>
+
+            <div class="btnSecBack">
+                <button class="myBtnSec">
+                    <a class="mySecLink" href="{% url 'store:cart' %}">Back to Cart</a>
+                </button>
+            </div>
+        </div>
+        <div class="summary-wrapper">
+            <h2>Summary:</h2>
+            <p><strong>Subtotal: </strong>{{ order.get_cart_subTotal }}€</p>
+            <p><strong>Shipping: </strong>{{ order.get_total_shipping }}€</p>
+            <p><strong>Total: </strong>{{ order.get_cart_total }}€</p>
+        </div>
+    </div>
+
+    <!-- THIS IS THE RECEIPT CONTAINER PAGE -->
+    <div class="checkout-wrapper checkout-rec-wrapper" data-status="notCompleted">
+        <div class="receipt-info">
+            <h1 class="main-heading">Thank you for your purchase!</h1>
+            <p id="transaction-details"></p>
+            <p>An email regarding this order details will be sent to the email <strong>{{ request.user.email }}</strong>.</p>
+            <p>An email regarding this transaction details will be sent to your paypal email or the email you filled, in the form.</p>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+ <!-- Include the PayPal JavaScript SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=AQ3jn6ClxW_-VmxfCh3D0nBghUwiE6ZCcB_SgPsrrCQVIek6PBTgCYEEHlif7H6a5Bm5Jo-bocqm5Jj3&currency=EUR"></script>
+
+<script>
+    let total = '{{ order.get_cart_total }}'
+    // Render the PayPal button into #paypal-button-container
+    paypal.Buttons({
+
+        style: {
+            color: 'blue',
+            shape: 'pill',
+            label: 'pay',
+            height: 50
+        },
+        // Set up the transaction
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                // ISTO É CÓDIGO ADICIONADO MAIS TARDE
+                intent: 'CAPTURE',
+                payer: {
+                    name: {
+                        given_name: `{{ user.first_name }}`,
+                        surname: `{{ user.last_name }}`
+                    }
+                },
+                address: {
+                    address_line_1: '{{ userAddress.street_address }}',
+                    address_line_2: '{{ userAddress.apartment_address }}',
+                    admin_area_2: '{{ userAddress.city }}',
+                    admin_area_1: '{{ userAddress.state }}',
+                    postal_code: '{{ userAddress.zip }}',
+                    country_code: '{{ userAddress.country }}',
+                },
+                purchase_units: [{
+                    amount: {
+                        value: parseFloat(total).toFixed(2)
+                    }
+                }]
+            });
+        },
+        // Finalize the transaction
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (orderData) {
+                let transaction = {
+                    'id': orderData.purchase_units[0].payments.captures[0]['id'],
+                    'status': orderData.purchase_units[0].payments.captures[0]['status'],
+                    'email': orderData.payer['email_address'],
+                    'method': 'Paypal',
+                    'date': orderData.create_time
+                }
+                submitFormData(transaction)
+            });
+        },
+        onCancel: function (data) {
+            alert('Something went wrong with the payment.')
+        },
+        onError: function (err) {
+            alert(`${err}`)
+        }
+    }).render('#paypal-button-container');
+
+    function submitFormData(transaction) {
+
+        var url = "/process-order/"
+        fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'applicaiton/json',
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({
+                    'total': total,
+                    'transaction': transaction
+                }),
+
+            })
+            .then((response) => response.json())
+            .then((data) => {
+
+                // HERE I CHEANGE THE CHECKOUT NAVBAR ACTIVE LINK AND REDIRECT THE USER TO THE "RECEIPT" WRAPPER
+                let marker = document.getElementById('marker')
+                let navLinks = document.querySelectorAll('.userNavLink')
+                let checkoutWrappers = document.getElementsByClassName('checkout-wrapper')
+
+                marker.style.left = navLinks[2].offsetLeft + 'px'
+
+                checkoutWrappers[1].style.display = 'none'
+                navLinks[1].classList.remove('active-link')
+
+                checkoutWrappers[2].style.display = 'flex'
+                navLinks[2].classList.add('active-link')
+                document.title = navLinks[2].innerText
+
+                // HERE I UPDATE THE CART ICON
+                let cartItems = document.getElementById('cartItems')
+                cartItems.innerText = 0
+
+                // HERE I DIPLAY SOME DETAILS FROM THE CURRENT TRANSACTION
+                let transactionDetails = document.getElementById('transaction-details')
+                transactionDetails.innerText = `The transaction with the ID:${transaction.id} was ${transaction.status}
+                                        at ${transaction.date}`
+
+                // HERE I CHANGE THE RECEIPT CONTAINER ATRIBUTE TO "completed" AND DISABLE THE LINKS
+                checkoutWrappers[2].dataset.status = 'completed'
+                navLinks[2].style.pointerEvents = 'all'
+                navLinks[0].style.pointerEvents = 'none'
+                navLinks[1].style.pointerEvents = 'none'
+            })
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your order was sent!</title>
+    <style>
+        strong, h3, h2, h1 {
+            color: #C19770;
+        }
+        h1 {
+            font-style: italic;
+        }
+        hr {
+            color: #644936;
+            background-color: #644936;
+            border-width:0;
+            height: 1px;
+        }
+        .thick-ruller {
+            height: 2px;
+        }
+        a {
+            color: #D5B895;
+        }
+        .flex-div{
+            display: flex;
+            justify-content: space-between;
+        }
+        .logo-div {
+            width: 75%;
+        }
+        .inner-div {
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-div">
+        <div class="logo-div">
+            <h1><a href="http://127.0.0.1:8000/">JoaoLina.com</a></h1>
+        </div>
+        <div class="inner_div">
+            <h2>Nova encomenda</h2>
+            <p><strong>Encomenda com ID:</strong>{{ order.id }}</p>
+        </div>
+    </div>
+
+    <p>
+        <strong>Ola JoãoLina</strong>, o user {{ user.username }}, com o email <strong>{{ user.email }}</strong> fez uma nova encomenda.
+    </p>
+
+    <h3>A encomenda foi feita no nome de:</h3>
+    {% if user.first_name and user.last_name %}
+        <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+    {% elif user.first_name %}
+        <h4>{{ user.first_name }}</h4>
+    {% else %}
+        <h4>O user não guardou um nome próprio.</h4>
+    {% endif %}
+
+    <hr class="thick-ruller">
+
+    <h3>A encomenda tera que ser enviada para:</h3>
+    <p><strong>Endereço de rua:</strong>{{ order.shipping_address.street_address }}</p>
+    {% if order.shipping_address.apartment_address %}
+        <p><strong>Numero da porta/apartamento:</strong>{{ order.shipping_address.apartment_address }}</p>
+    {% endif %}
+    <p><strong>Cidade:</strong>{{ order.shipping_address.city }}</p>
+    {% if order.shipping_address.state %}
+        <p><strong>Estado/região:</strong>{{ order.shipping_address.state }}</p>
+    {% endif %}
+    <p><strong>País:</strong>{{ order.shipping_address.country.name }}</p>
+    <hr class="thick-ruller">
+
+
+    
+    <h3>Produtos:</h3>
+    <div>
+        {% for item in items %}
+            <p>
+                O {{ user.username }} pediu {{ item.quantity }} <strong> <a href="http://127.0.0.1:8000{{ item.item.get_absolute_url }}">{{ item.item.title }}</a></strong>,
+                com o ID: <strong>{{ item.item.id }}</strong>, pôr {{ item.old_price }}€ cada, que deu um total de {{ item.get_old_total_price }}€.
+            </p>
+            {% if item.replica %}
+               <b>Este produto é uma réplica pedida pelo User.</b> 
+            {% endif %}
+            <hr>
+        {% endfor %}    
+    </div>
+    <hr class="thick-ruller">
+
+    <h3>Resumo da encomenda:</h3> 
+    <p>O {{ user.username }} pagou <strong>{{ order.get_old_total_shipping }}€</strong> de transporte.</p>
+    <p>O {{ user.username }} poupou pelos produtos <strong>{{ order.get_old_cart_subTotal }}€</strong> a contar com os discontos, se os teve.</p>
+    <p>O {{ user.username }} pagou um total de <strong>{{ order.get_old_cart_total }}€</strong>.</p>
+
+    <hr class="thick-ruller">
+    <h3>Resumo do pagamento:</h3>
+    <p>O pagamento foi feito através do {{ transaction.method }}.</p>
+    <p>O pagamento foi feito através do email {{ transaction.email }}.</p>
+    <p>O pagamento foi feito as: {{ transaction.date }}.</p>
+    <p>O ID do pagamento é: {{ transaction.id }}.</p>
+    <p>O status do pagamento foi: {{ transaction.status }}</p>
+
+    <hr class="thick-ruller">
+    <h3>Importante:</h3>
+    <p>
+        Depois de enviar a encomenda, faça questão de ir a página de admin
+        e na parte das "orders" procure esta order pôr ID e adiciona no campo de
+        "follow_code" o código de encomenda dos CTT.
+    </p>
+
+    <h3>Verifique se recebeu o pagamento e se recebeu alguma notificação/email do {{ transaction.method }}.</h3>
+    <h1>JoaoLina.com</h1>
+    
+</body>
+</html>

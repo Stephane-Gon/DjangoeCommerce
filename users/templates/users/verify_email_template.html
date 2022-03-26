@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your order was sent!</title>
+    <style>
+        strong, h3, h2, h1, a{
+            color: #C19770;
+        }
+        a {
+            text-decoration: none;
+        }
+        h1 {
+            font-style: italic;
+        }
+        hr {
+            color: #644936;
+            background-color: #644936;
+            border-width:0;
+            height: 1px;
+        }
+        .thick-ruller {
+            height: 2px;
+        }
+        .flex-div{
+            display: flex;
+            justify-content: space-between;
+        }
+        .logo-div {
+            width: 75%;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-div">
+        <div class="logo-div">
+            <h1><a href="http://127.0.0.1:8000/">JoaoLina.com</a></h1>
+        </div>
+    </div>
+
+    <p>
+        <strong>Hi</strong> {{ user.username }}, please click 
+        <strong><a href="http://{{ domain }}{% url 'activate-account' uidb64=uid token=token %}">here</a> </strong>
+         to confirm your registration. 
+    </p>
+    <hr class="thick-ruller">
+
+    <h3>I hope we will se you again.</h3>
+    <h1>JoaoLina.com</h1>
+    
+</body>
+</html>

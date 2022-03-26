@@ -1,0 +1,386 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Product: {{ item.title }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="product-hero">
+    {% if images|length > 1 %}
+        <div class="product-slider-wrapper glider-contain multiple" slider-active="true">
+            <button class="glider-prev">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+
+            <div class="glider product-slide">
+                {% for img in images %}
+                    <img src="{{ img.url }}" alt="Product Image">
+                {% endfor %}
+            </div>
+
+            <button class="glider-next">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
+    {% elif images|length == 1 %}
+        <div class="product-slider-wrapper">
+            <img src="{{ item.main_image.url }}" alt="Product Image">
+        </div>
+    {% else %}
+    <div class="error-product-slider">
+        <h1 class="mainHeading">This Product has no images</h1>
+    </div>
+    {% endif %}
+    <div class="product-info">
+        <h1 class="mainHeading">{{ item.title }}</h1>
+        {% if item.tag %}
+            <span class="tags tag-{{item.tag}}">
+                {% if item.tag == 'N' %}
+                NEW
+                {% elif item.tag == 'S' %}
+                {{ item.discount_price }}% SALE
+                {% elif item.tag == 'L' %}
+                Limited: {{ item.stock }} Left
+                {% elif item.tag == 'O' %}
+                OUT OF STOCK
+                {% endif %}
+            </span>
+        {% endif %}
+        <div class="product-spans">
+            <span>
+                <h2>Stock:</h2>
+                <h3>{{ item.stock }}</h3>
+            </span>
+            {% if item.discount_price != 0 %}
+                <span>
+                    <strike><h2>Old price:</h2></strike>
+                    <strike><h3>{{ item.price }}€</h3></strike>
+                </span>
+                <span>
+                    <h2>Discount:</h2>
+                    <h3>{{ item.discount_price }}%</h3>
+                </span>
+                <span>
+                    <h2>New price:</h2>
+                    <h3>{{ item.get_discount_price }}€</h3>
+                </span>
+            {% else %}
+                <span>
+                    <h2>Price:</h2>
+                    <h3>{{ item.price }}€</h3>
+                </span>
+            {% endif %}
+        </div>
+        {% if item.stock <= 0 %}
+        <button class="myBtnPri update-cart update-cart-disabled" data-product="{{item.id}}" data-action="add">
+            <a class="mySecLink" href="#">
+               ADD TO CART
+            </a>
+        </button>
+        {% elif item.stock > 0 %}
+        <button class="myBtnPri update-cart" data-product="{{item.id}}" data-action="add">
+            <a class="mySecLink" href="#">
+               ADD TO CART
+            </a>
+        </button>
+        {% endif %}
+        {% if item.stock <= 0 and request.user.is_authenticated %}
+            <span class="product-warning">
+                <h3>Warning:</h3>
+                <p>
+                    This is a unique product so we only had one.
+                    If you still want to order a replica keep in mind they will not 
+                    be the same, and you will have to wait more.
+                </p>
+            </span>
+            <button class="myBtnPri" id="refundBtn">
+                <a class="mySecLink" href="#">Order Replica</a>
+            </button>
+        {% elif item.stock <= 0 and not request.user.is_authenticated %}
+        <span class="product-warning">
+            <h3>Warning:</h3>
+            <p>
+                To order a replica of this item you must login.
+            </p>
+        </span>
+        {% endif %}
+    </div>
+</div>
+
+<div class="product-switchable">
+    <div class="switch-titles">
+        <h1>Description</h1>
+        <h1>Reviews({{ reviews.count }})</h1>
+    </div>
+    <div class="switch-desc">
+        <p class="product-desc">{{ item.description }}</p>
+    </div>
+    <div class="switch-reviews">
+        {% for review in reviews %}
+        <div class="product-review">
+            <h2>{{ review.user }}</h2>
+            <p>{{ review.content }}</p>
+            <span>
+                <h4>{{ review.date_added }}</h4>
+                <span class="review-stars">
+                    {% if review.stars == 0 %}
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    {% elif review.stars == 1 %}
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    {% elif review.stars == 2 %}
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    {% elif review.stars == 3 %}
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    {% elif review.stars == 4 %}
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    {% else %}
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    {% endif %}
+
+                </span>
+            </span>
+        </div>
+        {% endfor %}
+        {% if not madeReview and user.is_authenticated and boughtItem %}
+            <h1>Add a Review:</h1>
+            <form action="{% url 'store:product' item.slug %}" method="POST">
+                {% csrf_token %}
+                {{ form.content }}
+                {% if form.content.errors %}
+                    {% for error in form.content.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% endif %}
+                <h3>Give a Ratting:</h3>
+                {{ form.stars }}
+                {% if form.stars.errors %}
+                    {% for error in form.stars.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% endif %}
+
+                <button class="myBtnPri" type="submit">
+                    <a class="mySecLink">Add Review</a>
+                </button>
+            </form>
+        {% elif  user.is_authenticated == False%}
+            <h1 style="text-align: center">You have to be logged in to post a review.</h1>
+        {% elif not boughtItem %}
+            <h1 style="text-align: center">To make a review you have to buy the Item.</h1>
+        {% else %}
+            <h1 style="text-align: center">You already have a review on this product.</h1>
+        {% endif %}
+    </div>
+
+</div>
+
+<div class="product-details">
+    {% if item.dimensions %}
+        <p><strong>Dimensions:</strong> {{ item.dimensions }} cm</p>
+    {% else %}
+        <p>There are no dimensions for this item.</p>
+    {% endif %}
+    {% if item.weight %}
+        <p><strong>Weight:</strong> {{ item.weight }} kg</p>
+    {% else %}
+        <p>There is no weight value for this item.</p>
+    {% endif %}
+    {% if item.materials %}
+        <p><strong>Materials:</strong> {{ item.materials }};</p>
+    {% else %}
+        <p>There are no materials list for this item.</p>
+    {% endif %}
+    {% if item.craftsman %}
+        <p><strong>Craftsman:</strong> {{ item.craftsman }}</p>
+    {% else %}
+        <p>There is no craftsman name for this item.</p>
+    {% endif %}
+    <p><strong>Price:</strong> {{ item.get_discount_price }} €</p>
+    {% if item.rating == 0 %}
+        <p><strong>Reviews: </strong></p>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <span>({{ reviews.count }})</span>
+    {% elif item.rating == 1 %}
+        <p><strong>Reviews: </strong></p>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <span>({{ reviews.count }})</span>
+    {% elif item.rating == 2 %}
+        <p><strong>Reviews: </strong></p>  
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <span>({{ reviews.count }})</span>
+    {% elif item.rating == 3 %}
+        <p><strong>Reviews: </strong></p>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <i class="far fa-star"></i>
+        <span>({{ reviews.count }})</span>
+    {% elif item.rating == 4 %}
+        <p><strong>Reviews: </strong></p>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="far fa-star"></i>
+        <span>({{ reviews.count }})</span>
+    {% elif item.rating == 5 %}
+        <p><strong>Reviews: </strong></p>  
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <span>({{ reviews.count }})</span>
+    {% else %}
+        <p>There is no ratting value for this item.</p>
+    {% endif %}
+</div>
+
+
+<div class="identical-items-slide">
+    {% if moreItems %}
+        <h1 class="mainHeading">More products like this one:</h1>
+        <div class="card-slider">
+        {% for item in moreItems %}
+            <a href="{{ item.get_absolute_url }}">
+                <div class="product-card">
+                    <img src="{{ item.main_image.url }}" alt="Category Image">
+                    <div class="card-text">
+                        <h2>{{ item.categorie }}</h2>
+                        <h3>{{ item.title }}</h3>
+                        <div>
+                            {% if item.tag %}
+                                <span class="tags tag-{{item.tag}}">
+                                {% if item.tag == 'N' %}
+                                    NEW
+                                {% elif item.tag == 'S' %}
+                                    {{ item.discount_price }}% SALE
+                                {% elif item.tag == 'L' %}
+                                    Limited: {{ item.stock }} Left
+                                {% elif item.tag == 'O' %}
+                                    OUT OF STOCK
+                                {% endif %}
+                                </span>
+                            {% endif %}
+                            
+                            <h3 class="card-price">{{ item.get_discount_price }}€/UND</h3>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+
+{% if item.stock <= 0 %}
+<div class="refund-modalBg">
+    <div id="refund-modal" class="refund-modal product-modal">
+
+        <i id="model-exit-icon" class="fas fa-times"></i>
+        <div class="refund-alerts">
+            <p>This is a unique product so we only had one.</p>
+            <p>If you still want to order keep in mind that they will not be exactly the same.</p>
+        </div>
+        <form action="{% url 'store:product' item.slug %}" method="POST" class="contact-form refund-form">
+            {% csrf_token %}
+
+            {{ form2.quantity }}
+            {% if form2.quantity.errors %}
+                {% for error in form2.quantity.errors %}
+                    <span class="errorMessage">- {{ error|escape  }}</span>
+                {% endfor %}
+            {% endif %}
+            
+            <button class="myBtnPri" type="submit">
+                <a class="mySecLink">
+                    Order Replica
+                </a>
+            </button>
+        </form>
+        
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+
+    <!-- <script src="{% static 'js/cart.js' %}"></script> -->
+    <script src="{% static 'js/glider.min.js' %}"></script>
+    <script>
+        // THIS CHANGES THE CLASS OF THE HERO DIV TO ADJUST TO THE IMAGE SIZE
+        let images = document.querySelectorAll('.product-slider-wrapper img')
+        let productHero = document.querySelector('.product-hero')
+        for(let i= 0; i < images.length; i++) {
+
+            if(images[i].src.includes('landscape')) {
+                productHero.classList.add('hero-land')
+            } else {
+                productHero.classList.add('hero-port')
+            }
+        }
+
+        // THIS IS THE SLIDER LOGIC
+        let sliderWrapper = document.querySelector('.product-slider-wrapper')
+        if (sliderWrapper.hasAttribute('slider-active')) {
+            new Glider(document.querySelector('.product-slide'), {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                draggable: true,
+                arrows: {
+                    prev: '.glider-prev',
+                    next: '.glider-next'
+                },responsive: [{
+                    breakpoint: 1366,
+                    settings: {
+                        draggable: false,
+                    }
+                }],
+            })
+        }
+
+    </script>
+{% endblock %}

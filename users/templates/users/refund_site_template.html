@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your order was sent!</title>
+    <style>
+        strong, h3, h2, h1 {
+            color: #C19770;
+        }
+        h1 {
+            font-style: italic;
+        }
+        hr {
+            color: #644936;
+            background-color: #644936;
+            border-width:0;
+            height: 1px;
+        }
+        .thick-ruller {
+            height: 2px;
+        }
+        a {
+            color: #D5B895;
+        }
+        .flex-div{
+            display: flex;
+            justify-content: space-between;
+        }
+        .logo-div {
+            width: 75%;
+        }
+        .inner-div {
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-div">
+        <div class="logo-div">
+            <h1><a href="http://127.0.0.1:8000/">JoaoLina.com</a></h1>
+        </div>
+        <div class="inner_div">
+            {% if refund.quantity > 1 %}
+            <h2>Devolver Produtos</h2>
+            {% else %}
+            <h2>Devolver Produto</h2>
+            {% endif %}
+            <p><strong>ID da encomenda:</strong>#{{ refund.order.id }}</p>
+            <p><strong>ID do Order Item:</strong>#{{ refund.item.id }}</p>
+
+        </div>
+    </div>
+
+    <p>
+        <strong>Ola JoãoLina</strong>, o {{ user.username }}, com o email: {{ user.email }} requesitou uma devolução.
+    </p>
+
+    <hr class="thick-ruller">
+    <h3>Regras da devolução para o user:</h3> 
+    <p><b> O user só irá receber o valor do produto e não o valor da entrega.</b></p>
+    <p><b> A transferência só será feita quando os produtos/produto chegarem á loja.</b></p>
+    <p><b> A transferênçia será feita para a conta que o user efetuou o pagamento.</b></p>
+    <p><b> A razão do User para a devolução terá que ser aceitável.</b></p>
+    <p><b> O User devera enviar os items em boa condição.</b></p>
+    <p><b>
+        Se o User fez uma encomenda com produtos repetidos e os quiser devolver, basta enviar tudo junto.
+        Neste caso a transferençia sera o valor do produto * a quantidade.
+    </b></p>
+    
+    <hr class="thick-ruller">
+    <h3>O user terá que enviar os produtos/produto <b>bem embrulhados</b> para este endereço:</h3>
+    <p><b>Rua:</b>Rua João Rodrigues Morais, Centro Comercial Iberico</p>
+    <p><b>Nº de porta:</b>20-B</p>
+    <p><b>Código Postal:</b>4990-121</p>
+    <p><b>Vila/cidade:</b>Ponte de Lima, Viana do Castelo</p>
+    <p><b>Pais:</b>Portugal</p>
+
+    <hr class="thick-ruller">
+    <h3>Avisos:</h3>
+    <p><b>Se achou que a razão não foi aceitável, tente contactar o user pelo email que está em cima deste email.</b></p>
+    <p><b>
+        Se a Silvia recebeu o/os produtos e efetuou o pagamento é favor ir á página do admin
+        e no OrderItem com o ID <strong>{{ refund.item.id }}</strong> deverá colocar um check na caixa "Refund Granted".
+    </b></p>
+
+    <hr class="thick-ruller">
+    <h3>Fazer transferençia para:</h3>
+    {% if transaction.method == 'Paypal' %}
+    <p><b>{{ transaction.method }}</b></p>
+    <p>Para fazer a devolução pelo paypal, deverá enviar o valor de <b>{{ refund.get_refund_total }}€</b> para o email: <b>{{ transaction.email }}</b> </p>
+    {% endif %}
+
+    <hr class="thick-ruller">
+    <h3>Razão da devolução:</h3>
+    <p>{{ refund.reason }}</p>
+    
+
+    <hr class="thick-ruller">
+    {% if refund.quantity > 1 %}
+    <h3>Produtos que seram devolvidos:</h3>
+    {% else %}
+    <h3>Produto que será devolvido:</h3>
+    {% endif %}
+    <div>
+        <p>
+            O User quer devolver <b>{{ refund.quantity }}</b> cópias do item: <strong> <a href="http://127.0.0.1:8000{{ refund.item.item.get_absolute_url }}">{{ refund.item.item.title }}</a></strong>
+            com o ID de <strong>{{ refund.item.item.id }}</strong> pôr {{ refund.item.old_price }}€ cada.
+        </p>
+        <hr>
+    </div>
+
+
+    <hr class="thick-ruller">
+    <h1>JoaoLina.com</h1>
+    
+</body>
+</html>

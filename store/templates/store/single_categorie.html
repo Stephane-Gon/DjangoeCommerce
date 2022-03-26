@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Categorie: {{ categorie }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="test">
+    <aside class="categorie-navbar" id="cat-NavBar">
+        <div class="hide-navBar">
+            <i class="fas fa-caret-left"></i>
+            <div>
+                <h4>Hide Categories</h4>
+            </div>
+        </div>
+        <a class="cat-nav-brand" href="{% url 'store:home' %}">
+            <img src="{% static 'img/Logo1.svg' %}" alt="Logo" class="logo">
+            <img src="{% static 'img/LogoNome.svg' %}" alt="Logo Nome" class="logoName">
+        </a>
+        <h3>Categories:</h3>
+        <ul>
+            {% for cat in allCat %}
+
+                {% if cat.categorie == categorie %}
+                <li class="cat-active">
+                    <h2 class="cat-nav-link">{{ cat.categorie }}</h2>
+                </li> 
+                {% else %}
+                <li class="cat-nav-item">
+                    <a href="{{ cat.get_absolute_url }}"><h2 class="cat-nav-link">{{ cat.categorie }}</h2></a>
+                </li> 
+                {% endif %}   
+            {% endfor %}
+        </ul>
+    </aside>
+
+    <aside class="categorie-tooltip" id="cat-Tooltip">
+        <div class="vertical-text">
+            <h4>Show Categories</h4>
+        </div>
+        <i class="fas fa-sort-down"></i>
+    </aside>
+    
+    
+    <div class="product-wrapper">
+        {% if page %}
+            {% for item in page.object_list %}
+            <div class="sec-product-card">
+                    <a href="{{ item.get_absolute_url }}">
+                        <img class="card-image" src="{{ item.main_image.url }}" alt="{{ item.title }}">
+                    </a>
+                    <div class="card-mini-box">
+                        <h2>{{ item.title }}</h2>
+
+                        {% if item.stock > 0%}
+                            <a href="#"><img class="card-cart update-cart" data-product="{{ item.id }}" data-action="add" src="{% static 'img/CartOff.svg' %}" alt="Cart"></a>
+                        {% else %}
+                            <a  class="disabled-link"><img class="card-cart disabled-cart" src="{% static 'img/CartOff.svg' %}" alt="Cart"></a>
+                        {% endif %}
+
+                    </div>
+                    <div class="card-mini-box">
+                        <div class="stars">
+                            {% if item.rating == 0 or not item.rating %}
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>({{ item.reviewsLen }})</span>
+                            {% elif item.rating == 1 %}
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>({{ item.reviewsLen }})</span>
+                            {% elif item.rating == 2 %}
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>({{ item.reviewsLen }})</span>
+                            {% elif item.rating == 3 %}
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>({{ item.reviewsLen }})</span>
+                            {% elif item.rating == 4 %}
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span>({{ item.reviewsLen }})</span>
+                            {% elif item.rating == 5 %}
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>({{ item.reviewsLen }})</span>
+                            {% endif %}
+                        </div>
+                        <h4>{{ item.get_discount_price }}€</h4>
+                    </div>
+            </div>
+            {% endfor %}
+            {% if pageTotal > 1 %}
+                <div class="paginator-links">
+                        {% if page.has_previous %}
+                            <a class="paginator-link" href="?page=1">First</a>
+                            <a href="?page={{ page.previous_page_number }}"><i class="fa fa-chevron-left"></i></a>
+                        {% endif %}
+                        <span>
+                            <a class="paginator-current" href="?page={{ page.number }}">{{ page.number }}</a>
+                        </span>
+                        {% if page.has_next %}
+                            <a href="?page={{ page.next_page_number}}"><i class="fa fa-chevron-right"></i></a>
+                            <a class="paginator-link" href="?page={{ page.paginator.num_pages }}">Last</a>
+                        {% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+            <h1 class="mainHeading">There are currently no {{ categorie }} items.</h1>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

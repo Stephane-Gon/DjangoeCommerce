@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your order was sent!</title>
+    <style>
+        strong, h3, h2, h1 {
+            color: #C19770;
+        }
+        h1 {
+            font-style: italic;
+        }
+        hr {
+            color: #644936;
+            background-color: #644936;
+            border-width:0;
+            height: 1px;
+        }
+        .thick-ruller {
+            height: 2px;
+        }
+        a {
+            color: #D5B895;
+        }
+        .flex-div{
+            display: flex;
+            justify-content: space-between;
+        }
+        .logo-div {
+            width: 75%;
+        }
+        .inner-div {
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-div">
+        <div class="logo-div">
+            <h1><a href="http://127.0.0.1:8000/">JoaoLina.com</a></h1>
+        </div>
+        <div class="inner-div">
+            <h2>Devolução cancelada</h2>
+            <p><strong>ID da encomenda:</strong>#{{ refund.order.id }}</p>
+            <p><strong>ID do item encomendado:</strong>#{{ refund.item.id }}</p>
+        </div>
+    </div>
+
+    <p>
+        <strong>Ola JoãoLina</strong>, o {{ user.username }}, com o email: {{ user.email }} que requesitou uma devolução
+        do item encomendado com ID <strong>{{ refund.item.id }}</strong> acabou de pedir o cancelamento dessa devolução.
+    </p>
+
+    <hr class="thick-ruller">
+    <h3>Avisos:</h3>
+    <p>
+        Se o User cancelou a devolução depois de enviar os produtos o melhor a fazer será,
+        contactá-lo através do email, para saber se ele ainda quer os produtos.
+        Se sim o melhor será pedir pelo valor da entrega e voltar a enviar.
+    </p>
+
+
+    <hr class="thick-ruller">
+    <h1>JoaoLina.com</h1>
+    
+</body>
+</html>

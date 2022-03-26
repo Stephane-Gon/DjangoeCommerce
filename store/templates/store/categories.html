@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Categories
+{% endblock %}
+
+{% block content %}
+
+<div class="categories-wrapper">
+    {% for cat in object_list %}
+        <div>
+            <h1>{{ cat.categorie }}</h1>
+            <a href="{{ cat.get_absolute_url }}"><img src="{{ cat.image.url }}" alt="Categorie Image"></a>
+        </div>
+    {% endfor%}
+</div>
+ 
+{% endblock %}
+
+
+

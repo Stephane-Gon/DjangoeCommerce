@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your order was sent!</title>
+    <style>
+        strong, h3, h2, h1, a{
+            color: #C19770;
+        }
+        a {
+            text-decoration: none;
+        }
+        h1 {
+            font-style: italic;
+        }
+        hr {
+            color: #644936;
+            background-color: #644936;
+            border-width:0;
+            height: 1px;
+        }
+        .thick-ruller {
+            height: 2px;
+        }
+        .flex-div{
+            display: flex;
+            justify-content: space-between;
+        }
+        .logo-div {
+            width: 75%;
+        }
+        .inner-div {
+            width: 25%;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-div">
+        <div class="logo-div">
+            <h1><a href="http://127.0.0.1:8000/">JoaoLina.com</a></h1>
+        </div>
+        <div class="inner_div">
+            <h2>Contácto do User:</h2>
+            <p><strong>User com ID:</strong>{{ user.id }}</p>
+        </div>
+    </div>
+
+    <p><strong>Olá JoãoLina</strong> o user {{ user.username }} enviou a seguinte mensagem atraves do email <strong>{{ email }}</strong>.</p>
+    <hr class="thick-ruller">
+
+    <h3><strong>Titulo: </strong>{{ title }}</h3>
+    <h3><strong>Tema: </strong>{{ subject }}</h3>
+
+    <h3><strong>Mensagem:</strong></h3>
+    <p>{{ text }}</p>
+    <hr class="thick-ruller">
+
+    
+    
+
+    <h3>Para responder é só enviar mensagem para o email descrito em cima.</h3>
+    <h1>JoaoLina.com</h1>
+    
+</body>
+</html>

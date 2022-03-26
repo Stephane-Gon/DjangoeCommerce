@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Gallery Slide
+{% endblock %}
+
+{% block moreCss %}
+<!--GLIDER CSS-->
+<link rel="stylesheet" type="text/css" href="{% static 'css/glider.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="glider-contain multiple ga-slide-wrapper">
+
+    <button class="glider-prev">
+        <i class="fa fa-chevron-left"></i>
+    </button>
+
+    <div class="glider gallery-slide">
+        {% for img in images %}
+            <div>
+                {% if 'landscape' in img %}
+                    <img class="landscapeImg" src="{{ img }}" alt="{{ img.image }}">
+                {% elif 'portrait' in img %}
+                    <img class="portraitImg" src="{{ img }}" alt="{{ img.image }}">
+                {% endif %}
+            </div> 
+        {% endfor %}
+    </div>
+
+    <button class="glider-next">
+        <i class="fa fa-chevron-right"></i>
+    </button>
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<!--GLIDER JAVASCRIPT-->
+<script src="{% static 'js/glider.min.js' %}"></script>
+
+<script>
+    new Glider(document.querySelector('.gallery-slide'), {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        draggable: true,
+        scrollLock: true,
+        arrows: {
+            prev: '.glider-prev',
+            next: '.glider-next'
+        },responsive: [{
+            breakpoint: 1366,
+            settings: {
+                draggable: false,
+            }
+        }],
+    })
+
+    
+</script>
+{% endblock %}

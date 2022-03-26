@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="main-container">
+        <div class="user-wrapper">
+            <h3>{{ message }}</h3>
+            {% if active == True %}
+                    <h4>Log in again <a href="{% url 'login' %}">Here!</a></h4>
+
+            {% else %}
+                <h3>Click <a href="{% url 'resend-activate-account' uidb64=uidb64 token=token %}">here</a> to resend the email.</h3>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

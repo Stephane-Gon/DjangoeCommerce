@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock title %}</title>
+
+    <!--Font awesome-->
+    <script src="https://kit.fontawesome.com/2a9f666a77.js" crossorigin="anonymous"></script>
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" rel="stylesheet">
+    
+    {% block moreCss %}{% endblock moreCss %}
+
+    <!--My own Css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <!--Django Countries Flags-->
+    <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
+
+    <script>
+        // THIS IS A VARIABLE SO I CAN NOW IF THE USER IS LOGGED IN OR NOT
+        let user = '{{ request.user }}'
+
+        // HERE I GET THE NAME OF THE VIEW URL
+        let urlName = '{{ request.resolver_match.url_name }}'
+
+        // // ESTA FUNÇÃO CRIA UM CSRF_TOKEN
+        function getToken(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+        }
+        let csrftoken = getToken('csrftoken')
+
+        function retrieveCookie(name) {
+            let cookieArr = document.cookie.split(';')
+
+            for(let i = 0; i < cookieArr.length; i++) {
+                let cookiePair = cookieArr[i].split('=')
+
+                if(name === cookiePair[0].trim()){
+                    return decodeURIComponent(cookiePair[1])
+                }
+            }
+            return null
+        }
+        let cart = JSON.parse(retrieveCookie('cart'))
+
+        if(cart == null) {
+            let expiryDate = new Date();
+            expiryDate.setTime(expiryDate.getTime() + (30 * 24 * 60 * 60 * 1000));
+
+            cart = {};
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";expires=" + expiryDate + ";domain=;path=/"
+        }
+
+    </script>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="messages" id="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <h4 class="alert-{{message.tags }}">{{message}}</h4>
+            {% endfor %}
+            <i class="fas fa-times" id="messagesExitIcon"></i>
+        {% endif %}
+    </div>
+
+  
+    <div class="footer-gap">
+        {% block content %}
+
+        {% endblock content %}
+    </div>
+   
+    <div id="consent-popup" class="consent-hidden">
+        <p>By using this site you agree to our <strong><a id="cookie-preferences-btn" class="cookie-pref-link" href="#">cookie preferences</a></strong>.</p>
+
+        <button class="myBtnPri">
+            <a class="mySecLink" id="accept" href="#">Accept</a>
+        </button>
+    </div>
+
+    <aside id="cookie-preferences-wrapper" class="cookie-pref-aside cookie-pref-hidden">
+
+        <div class="cookie-pref-nav">
+            <h1 class="mainHeading">Cookie Preferences</h1>
+            <i class="fas fa-times" id="cookiePrefExitIcon"></i>
+        </div>
+        <p>When you visit a website, your data can be saved or retrieved by it in your browser. This storage is necessary to guarantee the basic functioning of the website.</p>
+
+        <div class="cookie-field">
+            <h4>Essencial</h4>
+
+            <div class="switch-field">
+                <input type="radio" id="radio-one" name="switch-one" value="yes" checked/>
+                <label for="radio-one">Yes</label>
+                <input type="radio" id="radio-two" name="switch-one" value="no" disabled/>
+                <label for="radio-two">No</label>
+            </div>
+        </div>
+        <p>These cookies are necessary to guarantee the basic functioning of the website. So they cannot be disabled.</p>
+       <hr>
+
+       <p><b>We do not use cookies for marketing, analysis or advertising.</b></p>
+
+    </aside>
+
+
+    {% include 'footer.html' %}
+
+    {% block scripts %}
+
+    {% endblock scripts %}
+
+    <script type="module" src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

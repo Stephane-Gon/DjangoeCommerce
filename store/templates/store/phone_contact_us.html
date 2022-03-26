@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Contact Us
+{% endblock %}
+
+
+
+
+{% block content %}
+<div class="main-container main-contact-container">
+    <h1 class="mainHeading">Contact Us</h1>
+
+    <div style="width: 100%;">
+        <div class="phone-contact-form-wrapper">
+            <div class="contact-form-back">
+                <h2>Send us a message:</h2>
+
+                <form action="/contact/" method="POST" class="contact-form">
+                    {% csrf_token %}
+
+                    {{ form.title }}
+                    {% if form.title.errors %}
+                        {% for error in form.title.errors %}
+                            <span class="errorMessage">- {{ error|escape  }}</span>
+                        {% endfor %}
+                    {% endif %}
+
+                    {{ form.subject }}
+                    {% if form.subject.errors %}
+                        {% for error in form.subject.errors %}
+                            <span class="errorMessage">- {{ error|escape  }}</span>
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if not user.is_authenticated %}
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            {% for error in form.email.errors %}
+                                <span class="errorMessage">- {{ error|escape  }}</span>
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+
+                    {{ form.text }}
+                    {% if form.text.errors %}
+                        {% for error in form.text.errors %}
+                            <span class="errorMessage">- {{ error|escape  }}</span>
+                        {% endfor %}
+                    {% endif %}
+
+                    
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+        <div class="phone-contact-info-wrapper">
+            <h2>Visit our Store</h2>
+            <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit, nesciunt.</h4>
+            <div class="contact-info">
+                <i class="fas fa-phone-alt"></i>
+                <h4>+351 967345123</h4>
+            </div>
+            <div class="contact-info">
+                <i class="fas fa-map-marker-alt"></i>
+                <h4>Arcos de Valdevez, rua 234</h4>
+            </div>
+            <div class="contact-info">
+                <i class="far fa-envelope"></i>
+                <h4>joaolina@gmail.com</h4>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}

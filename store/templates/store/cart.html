@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+
+{% block content %}
+
+<div class="cart-wrapper">
+    {% if items %}
+    <table class="cart-items-wrapper">
+        <thead>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr class="table-row" id="item-{{ item.item.id }}">
+                {% if item == None %}
+                    <td><h3>One of the items is no longer avaiable.</h3></td>
+                {% else %}
+                    <td>
+                        <a class="img-name-cell-link" href="{{ item.item.get_absolute_url }}">
+                            <img src="{{ item.item.main_image.url }}" alt="{{item.item.title}}"> 
+                            {{ item.item.title }}
+                            {% if item.replica %}
+                                <small>(Replica)</small>
+                            {% endif %}
+                        </a>
+                    </td>
+                    <td>{{ item.item.get_discount_price }}€</td>
+                    <td>
+                        <i class="fas fa-minus update-cart" data-product="{{ item.item.id }}" data-action="remove"></i>
+                        <span id="itemQuantity-{{ item.item.id }}">{{ item.quantity }}</span>
+                        <i class="fas fa-plus update-cart" data-product="{{ item.item.id }}" data-action="add"></i>
+                    </td>
+                    <td id="itemTotal-{{ item.item.id }}">{{ item.get_total_price }}€</td>
+                    <td><span data-product="{{ item.item.id }}" data-action="delete" class="update-cart remove-x">X</span></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="phone-items-wrapper">
+        {% for item in items %}
+            
+            <div id="item-phone-{{ item.item.id }}" class="phone-single-item">
+                {% if item == None %}
+                    <h3>One of the items is no longer avaiable.</h3>
+                {% else %}
+                    <div class="phone-cart-price">
+                        <h2>Price:</h2>
+                        <hr>
+                    </div>
+                    <div class="phone-cart-details">
+                        <a class="img-name-cell-link" href="{{ item.item.get_absolute_url }}">
+                            <img src="{{ item.item.main_image.url }}" alt="{{item.item.title}}"> 
+                            <h2>{{ item.item.title }}</h2>
+                            {% if item.replica %}
+                                <small>(Replica)</small>
+                            {% endif %}
+                        </a>
+                        
+                        <h5>{{ item.item.get_discount_price }}€</h5>
+                    </div>
+                    
+                    <span class="phone-cart-qty">
+                        <b>Qty:</b> 
+                        <i class="fas fa-minus update-cart" data-product="{{ item.item.id }}" data-action="remove"></i>
+                        <span id="itemQty-phone-{{ item.item.id }}">{{ item.quantity }}</span>
+                        <i class="fas fa-plus update-cart" data-product="{{ item.item.id }}" data-action="add"></i>
+                    </span>
+                    
+                    <span data-product="{{ item.item.id }}" data-action="delete" class="update-cart remove-x phone-cart-delete">
+                        <b>Delete: </b> 
+                        <p>X</p> 
+                    </span>
+                    <div class="phone-cart-price">
+                        <hr>
+                        <span>
+                            <h2>Total:</h2>
+                            <h3 id="item-Total-phone-{{ item.item.id }}">{{ item.get_total_price }}€</h3>
+                        </span>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="summary-wrapper">
+        <h2>Summary:</h2>
+        <p id="order-subTotal"><strong>Subtotal: </strong>{{ order.get_cart_subTotal }}€</p>
+        <p id="order-shipping"><strong>Shipping: </strong>{{ order.get_total_shipping}}€</p>
+        <p id="order-total"><strong>Total: </strong>{{ order.get_cart_total }}€</p>
+        <button class="myBtnPri">
+            <a class="mySecLink" href="{% url 'store:check-user' %}">Checkout</a>
+        </button>
+    </div>
+    {% else %}
+        <div class="align-h">
+            <h1 class="mainHeading">Your JoaoLina cart is empty.</h1>
+        </div>
+    {% endif %}
+</div>
+<button class="myBtnPri cart-btn">
+    <a class="mySecLink" href="{% url 'store:categories' %}">Continue Shopping</a>
+</button>
+
+
+{% endblock %}

@@ -1,0 +1,520 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<div class="main-container">
+
+    <!-- USER NAV BAR -->
+    <div class="userAccountNav" id="userAccountNav">
+        
+        <div class="user-marker" id="marker"></div>
+        
+        <h2 class="userNavLink active-link" id="userInfoLink">User Account</h2>
+        <h2 class="userNavLink" id="ordersInfoLink">User Orders</h2>
+        <h2 class="userNavLink" id="updateInfoLink">Update Info</h2>
+    </div>
+
+    <!-- USER PERSONAL INFORMATION DISPLAY -->
+    <div class="profile-wrapper profile-account-wrapper">
+        <h2 class="secHeader">User Personal Information:</h2>
+        <div class="profile-info-wrapper info-grid1">
+            <div class="info-wrapper">
+                {% if userInfo.first_name %}
+                    <h5>First Name</h5>
+                    <h3 class="infoText">{{ userInfo.first_name }}</h3>
+                {% else %}
+                    <h3>First Name</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userInfo.last_name %}
+                    <h5>Last Name</h5>
+                    <h3 class="infoText">{{ userInfo.last_name }}</h3>
+                {% else %}
+                    <h3>Last Name</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userInfo.email %}
+                    <h5>Email</h5>
+                    <h3 class="infoText">{{ userInfo.email }}</h3>
+                {% else %}
+                    <h3>Email</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+
+        </div>
+        <h2 class="secHeader">Shipping Address:</h2>
+        <div class="profile-info-wrapper info-grid2">
+
+            <div class="info-wrapper">
+                {% if userS.street_address %}
+                    <h5>Street Address</h5>
+                    <h3 class="infoText">{{ userS.street_address }}</h3>
+                {% else %}
+                    <h3>Street Address</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userS.apartment_address %}
+                    <h5>Apartment Address</h5>
+                    <h3 class="infoText">{{ userS.apartment_address }}</h3>
+                {% else %}
+                    <h3>Apartment Address</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userS.city %}
+                    <h5>City</h5>
+                    <h3 class="infoText">{{ userS.city }}</h3>
+                {% else %}
+                    <h3>City</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userS.state %}
+                    <h5>State</h5>
+                    <h3 class="infoText">{{ userS.state }}</h3>
+                {% else %}
+                    <h3>State</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userS.country %}
+                    <h5>Country</h5>
+                    <h3 class="infoText">{{ userS.country.name }}</h3>
+                {% else %}
+                    <h3>Country</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userS.zip %}
+                    <h5>Zip-Code</h5>
+                    <h3 class="infoText">{{ userS.zip }}</h3>
+                {% else %}
+                    <h3>Zip-Code</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+
+        </div>
+        <h2 class="secHeader">Billing Address:</h2>
+        <div class="profile-info-wrapper info-grid2">
+            <div class="info-wrapper">
+                {% if userB.street_address %}
+                    <h5>Street Address</h5>
+                    <h3 class="infoText">{{ userB.street_address }}</h3>
+                {% else %}
+                    <h3>Street Address</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userB.street_address %}
+                    <h5>Apartment Address</h5>
+                    <h3 class="infoText">{{ userB.apartment_address }}</h3>
+                {% else %}
+                    <h3>Apartment Address</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userB.city %}
+                    <h5>City</h5>
+                    <h3 class="infoText">{{ userB.city }}</h3>
+                {% else %}
+                    <h3>City</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userB.state %}
+                    <h5>State</h5>
+                    <h3 class="infoText">{{ userB.state }}</h3>
+                {% else %}
+                    <h3>State</h3>    
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userB.country %}
+                    <h5>Country</h5>
+                    <h3 class="infoText">{{ userB.country.name }}</h3>
+                {% else %}
+                    <h3>Country</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+            <div class="info-wrapper">
+                {% if userB.zip %}
+                    <h5>Zip-Code</h5>
+                    <h3 class="infoText">{{ userB.zip }}</h3>
+                {% else %}
+                    <h3>Zip-Code</h3>
+                {% endif %}
+                <div class="info-ruller"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- USER PERSONAL ORDERS DISPLAY -->
+    <div class="profile-wrapper profile-orders-wrapper">
+        {% if page %}
+            {% for order in page.object_list %}
+                {% if request.user.userWidth > 768 %}
+                    <table class="userOrders-table">
+                        <thead>
+                            <tr>
+                                <td class="head-td">Order Made In:</td>
+                                <td class="head-td">Total:</td>
+                                <td class="head-td">Receipt sent to:</td>
+                                <td class="head-td">Order id:</td>
+                                <td class="head-td ruller-td"><a href="{{ order.get_absolute_url }}">Order Details Here</a></td>
+                            </tr>
+                            <tr class="head-divider">
+                                <td>{{ order.ordered_date }}</td>
+                                <td>{{ order.get_old_cart_total }}€</td>
+                                <td>{{ order.user.email }}</td>
+                                <td>#{{ order.id }}</td>
+                            </tr>
+                            <tr>
+                                <td class="head-td">Product name:</td>
+                                <td class="head-td"></td>
+                                <td class="head-td">Product price:</td>
+                                <td class="head-td">Quantity:</td>
+                                <td class="head-td">Total:</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in order.orderitem_set.all %}
+                            <tr>
+                                <td>
+                                    <a href="{{ item.item.get_absolute_url }}">
+                                        <img class="orderItem-img" src="{{ item.item.main_image.url }}"
+                                        alt="Product Image">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ item.item.get_absolute_url }}">{{ item.item.title }}</a>
+                                </td>
+                                <td>{{ item.old_price }}€</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>{{ item.get_old_total_price }}€</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="user-wrapper">
+                        <p><b>Order Made In:</b> {{ order.ordered_date }}</p>
+                        <p><b>Total:</b> {{ order.get_old_cart_total }}€</p>
+                        <p><b>Receipt sent to:</b> {{ order.user.email }}</p>
+                        <p><b>Order id:</b> #{{ order.id }}</p>
+                        <p><a href="{{ order.get_absolute_url }}">Order Details Here</a></p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% if pageTotal > 1 %}
+                <div class="paginator-links">
+                    {% if page.has_previous %}
+                        <a class="paginator-link" href="?page=1">First</a>
+                        <a href="?page={{ page.previous_page_number }}"><i class="fa fa-chevron-left"></i></a>
+                    {% endif %}
+                    <span>
+                        <a class="paginator-current" href="?page={{ page.number }}">{{ page.number }}</a>
+                    </span>
+                    {% if page.has_next %}
+                        <a href="?page={{ page.next_page_number}}"><i class="fa fa-chevron-right"></i></a>
+                        <a class="paginator-link" href="?page={{ page.paginator.num_pages }}">Last</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% else %}
+        <div class="align-h">
+            <h1 class="mainHeading">There are currently no orders.</h1>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- USER PERSONAL INFORMATION UPDATE DISPLAY  -->
+    <div class="profile-wrapper profile-change-wrapper">
+
+        <!-- PERSONAL INFORMATION FORM -->
+        <h2 class="secHeader">User Personal Info:</h2>
+        <form method="POST" class="accountForm" id="userInfoForm">
+            {% csrf_token %}
+            <div class="form-group" id="first_name_group">
+                {% if userInfoForm.first_name.errors %}
+                    <label for="{{userInfoForm.first_name.id_for_label}}" class="myLabel required" itserror="True" >First Name</label>
+                    {{ userInfoForm.first_name }}
+                    <div class="inputRuller inputRullerError"></div>
+                    
+                    <div class="errorMessageWrapper first_name_errors">
+                        {% for error in userInfoForm.first_name.errors %}
+                            <span class="errorMessage">- {{ error|escape  }}</span>
+                        {% endfor %}
+                    </div>
+                        
+                {% else %}
+                    <label for="{{userInfoForm.first_name.id_for_label}}" class="myLabel required">First Name</label>
+                    {{ userInfoForm.first_name }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="form-group" id="last_name_group">
+                {% if userInfoForm.last_name.errors %}
+                    <label for="{{userInfoForm.last_name.id_for_label}}" class="myLabel" itserror="True">Last Name</label>
+                    {{ userInfoForm.last_name }}
+                    <div class="inputRuller inputRullerError"></div>
+                    <div class="errorMessageWrapper last_name_errors">
+                        {% for error in userInfoForm.last_name.errors %}
+                            <span class="errorMessage" >- {{ error|escape  }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <label for="{{userInfoForm.last_name.id_for_label}}" class="myLabel">Last Name</label>
+                    {{ userInfoForm.last_name }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="btn-form-group btn-form-group-shi">
+                <button name="user-info-form" class="myBtnPri" id="userInfoBtn">Update</button>
+            </div>
+        </form>
+
+        <!-- PASSWORD FORM -->
+        <h2 class="secHeader">User Password:</h2>
+        <form action="." method="POST" class="accountForm">
+            {% csrf_token %}
+
+            <div class="form-group" id="old_pass_group">
+                {% if userPassForm.old_password.errors %}
+                    <label for="{{ userPassForm.old_password.id_for_label }}" class="myLabel" itserror="True">New Password</label>
+                    {{ userPassForm.old_password }}
+                    <div class="inputRuller inputRullerError"></div>
+                    <div class="errorMessageWrapper">
+                        {% for error in userPassForm.old_password.errors %}
+                            <span class="errorMessage">- {{ error|escape  }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <label for="{{userPassForm.old_password.id_for_label}}" class="myLabel">Old Password</label>
+                    {{ userPassForm.old_password }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="form-group" id="new_pass_group">
+                <label for="{{userPassForm.new_password1.id_for_label}}" class="myLabel">New Password</label>
+                {{ userPassForm.new_password1 }}
+                <div class="inputRuller"></div>
+                <div class="errorMessageWrapper new_pass_errors">
+                    
+                </div>
+            </div>
+
+            <div class="form-group" id="confirm_pass_group">
+                {% if userPassForm.new_password2.errors %}
+                    <label for="{{ userPassForm.new_password2.id_for_label }}" class="myLabel" itserror="True">Confirm Password</label>
+                    {{ userPassForm.new_password2 }}
+                    <div class="inputRuller inputRullerError"></div>
+                    <div class="errorMessageWrapper confirm_pass_errors">
+                        <span class="errorMessage">{{ userPassForm.new_password2.errors|escape  }}</span>
+                    </div>
+                {% else %}
+                    <label for="{{userPassForm.new_password2.id_for_label}}" class="myLabel">Confirm Password</label>
+                    {{ userPassForm.new_password2 }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+            <div class="btn-form-group btn-form-group-shi">
+                <button name="user-pass-form" class="myBtnPri" id="userPassBtn">Update</button>
+            </div>
+        </form>
+
+        <!-- SHIPPING ADDRESS FORM -->
+        <h2 class="secHeader">User Shipping Address:</h2>
+        <form action="." method="POST" class="accountForm accountAddressForm">
+            {% csrf_token %}
+
+            <div class="form-group">
+                {% if userSForm.street_address.errors %}
+                    <label for="{{userSForm.street_address.id_for_label}}" class="myLabel required" itserror="True">Street Address</label>
+                    {{ userSForm.street_address }}
+                    <div class="inputRuller inputRullerError"></div>
+                    {% for error in userSForm.street_address.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                
+                {% else %}
+                    <label for="{{userSForm.street_address.id_for_label}}" class="myLabel required">Street Address</label>
+                    {{ userSForm.street_address }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{userSForm.apartment_address.id_for_label}}" class="myLabel">Apartment Address</label>
+                {{ userSForm.apartment_address }}
+                <div class="inputRuller"></div>
+            </div>
+
+            <div class="form-group">
+                {% if userSForm.city.errors %}
+                    <label for="{{userSForm.city.id_for_label}}" class="myLabel required" itserror="True">City</label>
+                    {{ userSForm.city }}
+                    <div class="inputRuller inputRullerError"></div>
+                    {% for error in userSForm.city.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{userSForm.city.id_for_label}}" class="myLabel required">City</label>
+                    {{ userSForm.city }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{userSForm.state.id_for_label}}" class="myLabel">State</label>
+                {{ userSForm.state }}
+                <div class="inputRuller"></div>
+            </div>
+
+            <div class="form-group">
+                {% if userSForm.country.errors %}
+                    <label for="{{userSForm.country.id_for_label}}" class="myLabel required" itserror="True">Country</label>
+                    {{ userSForm.country }}
+                    {% for error in userSForm.country.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{userSForm.country.id_for_label}}" class="myLabel required">Country</label>
+                    {{ userSForm.country }}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {% if userSForm.zip.errors %}
+                    <label for="{{userSForm.zip.id_for_label}}" class="myLabel required" itserror="True">Zip Code</label>
+                    {{ userSForm.zip }}
+                    <div class="inputRuller inputRullerError"></div>
+                    {% for error in userSForm.zip.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{userSForm.zip.id_for_label}}" class="myLabel required">Zip Code</label>
+                    {{ userSForm.zip }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="btn-form-group btn-form-group-shi">
+                <button name="user-shipping-form" class="myBtnPri">Update</button>
+            </div>
+            
+        </form>
+        
+        <!-- BILLING ADDRESS FORM -->
+        <h2 class="secHeader">User Billing Address:</h2>
+        <form action="." method="POST" class="accountForm accountAddressForm">
+            {% csrf_token %}
+
+            <div class="form-group">
+                {% if userBForm.street_address.errors %}
+                    <label for="{{userBForm.street_address.id_for_label}}" class="myLabel required">Street Address</label>
+                    {{ userBForm.street_address }}
+                    <div class="inputRuller"></div>
+                    {% for error in userBForm.street_address.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{userBForm.street_address.id_for_label}}" class="myLabel required">Street Address</label>
+                    {{ userBForm.street_address }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{userBForm.apartment_address.id_for_label}}" class="myLabel">Apartment Address</label>
+                {{ userBForm.apartment_address }}
+                <div class="inputRuller"></div>
+            </div>
+
+            <div class="form-group">
+                {% if userBForm.city.errors %}
+                    <label for="{{userBForm.city.id_for_label}}" class="myLabel required">City</label>
+                    {{ userBForm.city }}
+                    <div class="inputRuller"></div>
+                    {% for error in userBForm.city.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{userBForm.city.id_for_label}}" class="myLabel required">City</label>
+                    {{ userBForm.city }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="{{userBForm.state.id_for_label}}" class="myLabel">State</label>
+                {{ userBForm.state }}
+                <div class="inputRuller"></div>
+            </div>
+
+            <div class="form-group">
+                {% if userBForm.country.errors %}
+                    <label for="{{userBForm.country.id_for_label}}" class="myLabel required">Country</label>
+                    {{ userBForm.country }}
+                    {% for error in userBForm.country.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{userBForm.country.id_for_label}}" class="myLabel required">Country</label>
+                    {{ userBForm.country }}    
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {% if userBForm.zip.errors %}
+                    <label for="{{userBForm.zip.id_for_label}}" class="myLabel required">Zip Code</label>
+                    {{ userBForm.zip }}
+                    <div class="inputRuller"></div>
+                    {% for error in userBForm.zip.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% else %}
+                    <label for="{{userBForm.zip.id_for_label}}" class="myLabel required">Zip Code</label>
+                    {{ userBForm.zip }}
+                    <div class="inputRuller"></div>
+                {% endif %}
+            </div>
+
+            <div class="btn-form-group btn-form-group-shi">
+                <button name="user-billing-form" class="myBtnPri">Update</button>
+            </div>
+            
+        </form>
+
+
+
+
+    </div>
+</div>
+
+{% endblock %}
+

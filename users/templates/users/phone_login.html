@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+
+{% block content %}
+<div class="main-container">
+    <div class="phone-loginContainer" id="loginContainer">
+        <div class="phone-form-container phone-sign-up-container">
+            <form action="/register/" method="POST">
+                {% csrf_token %}
+                <h2>Create Account</h2>
+                
+                
+                <label for="{{ rForm.username.id_for_label }}" class="myLabel">Username</label>
+                {{ rForm.username }}
+                <div class="inputRuller"></div>
+
+                <label for="{{ rForm.email.id_for_label }}" class="myLabel">Email</label>
+                {{ rForm.email }} 
+                <div class="inputRuller"></div>
+
+                <label for="{{ rForm.password1.id_for_label }}" class="myLabel">Password</label>
+                {{ rForm.password1 }}
+                <div class="inputRuller"></div>
+       
+            
+                <label for="{{ rForm.password2.id_for_label }}" class="myLabel">Confirm password</label>
+                {{ rForm.password2 }}
+                <div class="inputRuller"></div>
+                
+            
+                <div class="btnSecBack">
+                    <button class="myBtnSec">Register</button>
+                </div>
+            </form>
+        </div>
+        <div class="phone-form-container phone-sign-in-container">
+            <form action="/login/" method="POST">
+                {% csrf_token %}
+                <h2>Sign in</h2>
+                
+    
+                <label for="{{ lForm.username.id_for_label }}" class="myLabel">Email</label>
+                {{ lForm.email }} 
+                <div class="inputRuller"></div>
+                {% if lForm.email.errors %}
+                    {% for error in lForm.email.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% endif %}
+
+                <label for="{{ lForm.username.id_for_label }}" class="myLabel">Password</label>
+                {{ lForm.password1 }}
+                <div class="inputRuller"></div>
+                {% if lForm.password1.errors %}
+                    {% for error in lForm.password1.errors %}
+                        <span class="errorMessage">- {{ error|escape  }}</span>
+                    {% endfor %}
+                {% endif %}
+                <small class="text-muted">
+                    <a class="mySecLink" href="{% url 'reset_password' %}">Don't remenber your password?</a>
+                </small>
+                
+                <div class="btnSecBack">
+                    <button type="submit" class="myBtnSec">Log In</button>
+                </div>
+                
+            </form>
+        </div>
+        <div class="phone-overlay-container">
+            <div class="phone-overlay">
+                <div class="phone-overlay-panel overlay-bottom">
+                    <h1>Welcome Back!</h1>
+                    <p>Already have an account?</p>
+                    <button class="myBtnPri" id="signIn">Log in</button>
+                    <hr>
+                
+                </div>
+                <div class="phone-overlay-panel overlay-top">
+                    <h1>Hello, Friend!</h1>
+                    <p>Hi, do you need an account?</p>
+                    <button class="myBtnPri" id="signUp">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <ul class="passwordErrorWrapper">
+            {% if rForm.password2.errors %}
+                <h4>Password errors:</h4>
+                {% for error in rForm.password2.errors %}
+                    <li class="errorMessage">- {{ error|escape  }}</li>
+                {% endfor %}
+            {% endif %}
+            {% if rForm.password1.errors %}
+                {% for error in rForm.password1.errors %}
+                    <li class="errorMessage">- {{ error|escape  }}</li>
+                {% endfor %}
+            {% endif %}
+            {% if rForm.username.errors %}
+                <h4>Username errors:</h4>
+                {% for error in rForm.username.errors %}
+                    <span class="errorMessage">- {{ error|escape }}</span>
+                {% endfor %}
+            {% endif %}
+            {% if rForm.email.errors %}
+                <h4>Email errors:</h4>
+                {% for error in rForm.email.errors %}
+                    <span class="errorMessage">- {{ error|escape  }}</span>
+                {% endfor %}
+            {% endif %}
+        </ul>
+        <ul class="requirementsList">
+            <h4>Password requirements:</h4>
+            <li>Your password must have a minimum of 8 characters.</li>
+            <li>Your password must contain at least 1 number.</li>
+            <li>Your password must contain at least 1 upper letter.</li>
+            <li>Your password cannot be only numbers.</li>
+            <li>Your password cannot be a common password.</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

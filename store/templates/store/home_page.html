@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block moreCss %}
+<!--GLIDER CSS-->
+<link rel="stylesheet" type="text/css" href="{% static 'css/glider.min.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="heroBox">
+    <h1 class="heroHeader">Produtos tradicionais do Minho</h1>
+    <img src="{% static 'img/photos/montra-variada.jpg' %}" alt="Store Image" class="homeHeroImg">
+    <button class="myBtnPri heroBtn">
+        <a class="mySecLink" href="{% url 'store:categories' %}">Shop Now</a>
+    </button>
+</div>
+
+<!-- CATEGORIES SHOWCASE -->
+<div class="glider-contain multiple home-wrapper custom-home-wrapper">
+    <h2>Categories:</h2>
+    {% if not categories %}
+    <h2>There are no categories avaiable.</h2>
+    {% else %}
+
+    <button class="glider-prev">
+        <i class="fa fa-chevron-left"></i>
+    </button>
+
+    <div class="slider-background"></div>
+    <div class="glider">
+        {% for cat in categories %}
+        <div class="singleSlideWrapper">
+            <a href="{{ cat.get_absolute_url }}">
+                <h3 class="cardTitle">{{ cat.categorie }}</h3>
+                <img src="{{ cat.image.url }}" alt="Category Image">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <button class="glider-next">
+        <i class="fa fa-chevron-right"></i>
+    </button>
+
+    <div class="btnSecBack">
+        <button class="myBtnSec">
+            <a class="mySecLink" href="{% url 'store:categories' %}">All Categories</a>
+        </button>
+    </div>
+    {% endif %}
+</div>
+
+
+<!-- PRODUCTS SHOWCASE -->
+<div class="glider-contain multiple home-wrapper custom-home-wrapper">
+    <h2>Products:</h2>
+
+    {% if not items %}
+    <h2>There are no new products avaiable.</h2>
+    {% else %}
+    <button class="glider-prev glider-prev-card">
+        <i class="fa fa-chevron-left"></i>
+    </button>
+
+    <div class="glider card-slider">
+        {% for item in items %}
+        <div>
+            <div class="product-card">
+                <a href="{{ item.get_absolute_url }}">
+                    <img src="{{ item.main_image.url }}" alt="Category Image">
+                    <div class="card-text">
+                        <h2>{{ item.categorie }}</h2>
+                        <h3>{{ item.title }}</h3>
+                        <div>
+                            {% if item.tag %}
+                                <span class="tags tag-{{item.tag}}">
+                                {% if item.tag == 'N' %}
+                                    NEW
+                                {% elif item.tag == 'S' %}
+                                    {{ item.discount_price }}% SALE
+                                {% elif item.tag == 'L' %}
+                                    Limited: {{ item.stock }} Left
+                                {% elif item.tag == 'O' %}
+                                    OUT OF STOCK
+                                {% endif %}
+                                </span>
+                            {% endif %}
+                            
+                            <h3>{{ item.get_discount_price }}€/UND</h3>
+                        </div>
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <button class="glider-next glider-next-card">
+        <i class="fa fa-chevron-right"></i>
+    </button>
+    {% endif %}
+
+</div>
+
+
+<!-- GALLERY SHOWCASE -->
+<div class="home-wrapper">
+    <h2>Store Gallery:</h2>
+    {% if request.user.userWidth > 768 %}
+    <div class="gallery-grid" onclick="location.href='gallery';" style="cursor: pointer;">
+        {% for img in allImages %}
+            <img src="{{ img.image.url }}" alt="Imagem da galeria">
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="phone-gallery-grid" onclick="location.href='gallery';" style="cursor: pointer;">
+        {% for img in allImages %}
+            <img src="{{ img.image.url }}" alt="Imagem da galeria">
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+
+<!-- ABOUT US INFO -->
+<div class="home-wrapper">
+    <h2>About Us:</h2>
+    <div class="about-container">
+        <div class="about-text">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Deleniti inventore, cupiditate alias aperiam provident,
+                nobis ipsam velit praesentium numquam ducimus blanditiis necessitatibus
+                dicta. Deserunt, repudiandae.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Deleniti inventore, cupiditate alias aperiam provident,
+                nobis ipsam velit praesentium numquam ducimus blanditiis necessitatibus
+                dicta. Deserunt, repudiandae.
+            </p>
+            <div class="btnSecBack">
+                <button class="myBtnSec">
+                    <a class="mySecLink" href="{% url 'store:about' %}">About</a>
+                </button>
+            </div>
+        </div>
+        <img src="{% static 'img/photos/montra-principal.jpg' %}" alt="About us Image">
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!--GLIDER JAVASCRIPT-->
+<script src="{% static 'js/glider.min.js' %}"></script>
+
+<script>
+    
+    new Glider(document.querySelector('.glider'), {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        scrollLock: true,
+        draggable: true,
+        arrows: {
+            prev: '.glider-prev',
+            next: '.glider-next'
+        },
+        responsive: [{
+            breakpoint: 775,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+                itemWidth: 150,
+                duration: 0.25
+            }
+        }, {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3
+            }
+        }]
+    })
+
+    new Glider(document.querySelector('.card-slider'), {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        scrollLock: true,
+        draggable: true,
+        arrows: {
+            prev: '.glider-prev-card',
+            next: '.glider-next-card'
+        },
+        responsive: [{
+            breakpoint: 360,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                itemWidth: 150,
+                duration: 0.25,
+                draggable: true,
+            }
+        }, {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 2,
+                draggable: false,
+            }
+        }, {
+            breakpoint: 1366,
+            settings: {
+                slidesToShow: 3,
+            }
+        }]
+    })
+</script>
+{% endblock %}

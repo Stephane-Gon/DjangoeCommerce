@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+    Order {{ order.id }} Details
+{% endblock %}
+
+{% block content %}
+
+<div class="order-wrapper">
+
+    <h1 class="main-heading">Order details:</h1>
+
+    <div class="order-details">
+        <p> <strong>Ordered date: </strong>{{ order.ordered_date }}</p>
+        <span></span>
+        <p><strong>Order ID: </strong>{{ order.id }}</p>
+    </div>
+    <div class="order-info">
+        <div>
+            <h3>Order Address:</h3>
+            <p>{{ order.user.first_name }} {{ order.user.last_name }}</p>
+            <p>
+                {{ order.shipping_address.street_address }}
+                {% if order.shipping_address.apartment_address %}
+                    , {{ order.shipping_address.apartment_address }}
+                {% endif %}
+            </p>
+            <p>
+                {{ order.shipping_address.city }}
+                {% if order.shipping_address.state %}
+                    , {{ order.shipping_address.state }}
+                {% endif %}
+            </p>
+            <p>{{ order.shipping_address.zip }}</p>
+            <p>{{ order.shipping_address.country.name }}</p>
+        </div>
+        <hr class="hidden-divider">
+        <div>
+            <h3>Order Status:</h3>
+            <p><b>Order delivered: </b>{{ order.ordered}} </p>
+            <p><b>Order received: </b> {{ order.received }}</p>
+
+        </div>
+        <hr class="hidden-divider">
+        <div>
+            <h3>Transaction:</h3>
+            <p><b>Method: </b>{{ transaction.method }} </p>
+            <p><b>Status: </b> {{ transaction.status }}</p>
+
+        </div>
+        <hr class="hidden-divider">
+        <div>
+            <h3>Order Summary:</h3>
+            <p>Sub total price: {{ order.get_old_cart_subTotal }}€</p>
+            <p>Shipping price: {{ order.get_old_total_shipping}}€</p>
+            <p><strong>Order total:</strong> {{ order.get_old_cart_total }}€</p>
+        </div>
+    </div>
+
+    <div class="order-items-display">
+        <div class="order-total-items">
+            <h2>{{ order.get_cart_items }} items</h2>
+        </div>
+        {% for item in order.orderitem_set.all %}
+            <div class="single-order-item">
+                <span >
+                    <a href="{{ item.item.get_absolute_url }}">
+                        <img src="{{ item.item.main_image.url }}" alt="{{ item.item.title }} image">
+                    </a>
+                </span>
+                <span class="order-item-details">
+                    <h3><a href="{{ item.item.get_absolute_url }}">
+                        {{ item.item.title }}
+                        {% if item.replica %}
+                            <small>(Replica)</small>
+                        {% endif %}
+                    </a></h3>
+                    <p><strong>Price: </strong>{{ item.old_price }}€</p>
+                    
+                    {% if item.quantity > 1 %}
+                        <p><strong>Quantity: </strong>{{ item.quantity }}</p>
+                        <p><strong>Total: </strong>{{ item.get_old_total_price }}€</p>
+                    {% endif %}
+
+                    {% if order.refund_deadline > nowDate %}
+                        <p><b>The deadline for requesting a refund ends in {{ order.refund_deadline }}(30 days)</b></p>
+                    {% else %}
+                        <p><b>The deadline for requesting a refund ended in {{ order.refund_deadline }}.</b></p>
+                    {% endif %}
+                    <button class="myBtnPri update-cart" data-product="{{item.id}}" data-action="add">
+                        <a class="mySecLink" href="{{ item.item.get_absolute_url }}">
+                            Buy Again
+                        </a>
+                    </button>
+                    {% if item.refund_requested %}
+                        <p><b>Refund requested: </b> {{ item.refund_requested }}</p>
+                        <p><b>Refund granted: </b> {{ item.refund_granted }}</p>
+                        <form action="{% url 'order-cancel' order.slug %}" method="POST" class="cancel-form">
+                            {% csrf_token %}
+
+                            <!-- <input class="myBtnPri cancel-btns" type="submit" data-item="{{ item.item.id }}"> -->
+                            <button class="myBtnPri cancel-btns" type="submit" data-item="{{ item.item.id }}">
+                                <a class="mySecLink">
+                                    Cancel Refund
+                                </a>
+                            </button>
+                        </form>
+                    {% elif item.refund_requested == False and order.refund_deadline > nowDate %}
+                        <button class="myBtnPri refundBtn" data-item="{{ item.item.id }}" data-qty="{{ item.quantity }}">
+                            <a class="mySecLink" href="#">
+                                Refund?
+                            </a>
+                        </button>
+                    {% else %}
+                        <p>Since the refund deadline is over you can no longer refund this Iitem.</p>
+                    {% endif %}
+                </span>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% if not order.refund_requested %}
+<div class="refund-modalBg">
+    <div id="refund-modal" class="refund-modal">
+        <i id="model-exit-icon" class="fas fa-times"></i>
+        <div class="refund-alerts">
+            <p>- We will only return you the value of the product, not the shipping.</p>
+            <p>- We will only transfer the payment after we received the product shipped by you.</p>
+            <p>- <b>Send at least one image per product and a maximum of two per product.</b></p>
+        </div>
+
+        <form action="{% url 'order-details' order.slug %}" method="POST" class="contact-form refund-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.item }}
+
+            {{ form.reason }}
+            {% if form.reason.errors %}
+                {% for error in form.reason.errors %}
+                    <span class="errorMessage">- {{ error|escape  }}</span>
+                {% endfor %}
+            {% endif %}
+
+            <label for="{{form.quantity.id_for_label}}" id="qty-label" class="myLabel"></label>
+            {{ form.quantity }}
+            {% if form.quantity.errors %}
+                {% for error in form.quantity.errors %}
+                    <span class="errorMessage">- {{ error|escape  }}</span>
+                {% endfor %}
+            {% endif %}
+
+            {{ form.images }}
+            {% if form.images.errors %}
+                {% for error in form.images.errors %}
+                    <span class="errorMessage">- {{ error|escape  }}</span>
+                {% endfor %}
+            {% endif %}
+            <button class="myBtnPri" type="submit" id="submit-refundBtn">
+                <a class="mySecLink">
+                    Ask for refund
+                </a>
+            </button>
+        </form>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
