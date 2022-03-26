@@ -11,8 +11,7 @@ from django.utils.html import strip_tags
 from django.contrib.auth.decorators import user_passes_test
 
 from store.models import *
-from joaoLina.settings.dev import SHIPPING_PRICE
-# from joaoLina.settings.prod import SHIPPING_PRICE
+from joaoLina.settings.base import SHIPPING_PRICE
 
 # VER UMA FORMA DE SÓ PASSAR O VALOR DE CARTITEMS PARA VIEWS QUE NÃO PRECISÃO DE MAIS
 def cookieCart(request):

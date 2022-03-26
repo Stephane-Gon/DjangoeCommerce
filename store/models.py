@@ -10,8 +10,7 @@ from django.utils.six import b
 from django_countries.fields import CountryField
 
 from users.models import UserAccount
-from joaoLina.settings.dev import SHIPPING_PRICE
-# from joaoLina.settings.prod import SHIPPING_PRICE
+from joaoLina.settings.base import SHIPPING_PRICE
 
 
 

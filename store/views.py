@@ -17,7 +17,7 @@ from .forms import ContactUsForm, AddReviewForm, OrderReplicaForm
 from .models import Categorie, Item, Image, Review, OrderItem, Address, Order, Transaction
 from users.forms import UserAddressInfoForm
 from joaoLina.helpers import cartData, createOrder, getUserWidth
-from joaoLina.settings.dev import SHIPPING_PRICE
+from joaoLina.settings.base import SHIPPING_PRICE
 
 
 # THIS IS THE ABOUT VIEW
