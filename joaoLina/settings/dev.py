@@ -6,14 +6,21 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# Database
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'joaolinadb',
+        'USER': 'stef',
+        'PASSWORD': 'Stef@Maria1997',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-
-# PESO PÔR KILO ==== PASSAR PARA O HEROKU QUANDO ESTIVER ON
-SHIPPING_PRICE = 3

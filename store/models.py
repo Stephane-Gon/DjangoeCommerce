@@ -1,4 +1,3 @@
-from django.http import request
 from django.utils.crypto import get_random_string
 
 
@@ -11,7 +10,10 @@ from django.utils.six import b
 from django_countries.fields import CountryField
 
 from users.models import UserAccount
-from joaoLina.settings import SHIPPING_PRICE
+from joaoLina.settings.dev import SHIPPING_PRICE
+# from joaoLina.settings.prod import SHIPPING_PRICE
+
+
 
 ADDRESS_CHOICES = (
     ('B', 'billing'),

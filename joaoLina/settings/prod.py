@@ -1,4 +1,5 @@
 from .base import *
+import dj_database_url
 import django_on_heroku
 from decouple import config
 
@@ -7,6 +8,10 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['joaolina.herokuapp.com', '127.0.0.1']
+
+DATABASES = {
+    'default': dj_database_url.config(default='sqlite3:///db.sqlite', conn_max_age=600)
+}
 
 # AWS S3 SETTINGS
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
@@ -32,9 +37,6 @@ STATICFILES_STORAGE = 'joaoLina.storage_backend.StaticStorage'
 DEFAULT_FILE_STORAGE = 'joaoLina.storage_backend.MediaStorage'
 MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, 'media')
 
-
-# PESO PÔR KILO ==== PASSAR PARA O HEROKU QUANDO ESTIVER ON
-SHIPPING_PRICE = config('LINA_SHIPPING_PRICE')
 
 # HEROKU LOGGING
 DEBUG_PROPAGATE_EXCEPTIONS = True

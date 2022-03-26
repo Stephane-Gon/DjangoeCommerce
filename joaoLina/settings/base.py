@@ -1,6 +1,5 @@
 
 from pathlib import Path
-# import dj_database_url
 import os
 from decouple import config
 from dotenv import load_dotenv, find_dotenv
@@ -55,17 +54,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'joaoLina.wsgi.application'
 
 load_dotenv(find_dotenv())
-# Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'joaolinadb',
-        'USER': os.environ.get('LINA_DB_USER'),
-        'PASSWORD': os.environ.get('LINA_DB_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -137,15 +126,16 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 # PASSWORD RESET
 PASSWORD_RESET_TIMEOUT = 18000
 
 
-# django_heroku.settings(locals())
+# PESO PÔR KILO ==== PASSAR PARA O HEROKU QUANDO ESTIVER ON
+SHIPPING_PRICE = config('LINA_SHIPPING_PRICE')
 
 # HTTPS SETTING
 # SESSION_COOKIE_SECURE = True
