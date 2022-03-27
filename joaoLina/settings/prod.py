@@ -7,7 +7,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['joaolina.herokuapp.com', 'www.joaolina.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': dj_database_url.config(default='sqlite3:///db.sqlite', conn_max_age=600)
