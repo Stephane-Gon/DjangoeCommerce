@@ -5,7 +5,7 @@ from decouple import config
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['joaolina.heroku.com', 'www.joaolina.heroku.com']
 
