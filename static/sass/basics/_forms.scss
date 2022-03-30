@@ -1,0 +1,354 @@
+@use '../helpers' as *;
+
+
+form {
+    background: $dutchWhite;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+    @extend %columnFlex;
+    
+    .form-group {
+        width: 50%;
+        @extend %columnFlex;
+    }
+
+    .myLabel {
+        margin-top: 10px;
+        align-self: flex-start;
+        text-transform: uppercase;
+        @include text(1.5rem, 500, none, $coffe);
+        transition: transform .2s cubic-bezier(.17,.67,.83,.67);
+
+        &.required::after {
+            content: " *";
+            color: red;
+            font-weight: bold;
+        }
+    }
+
+    .myInput {
+        margin-top: 10px;
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        height: 35px;
+        @include text(1.5rem, 500, none, $coffe);
+
+        &:focus + .inputRuller::after,
+        &:valid + .inputRuller::after,
+        &:hover + .inputRuller::after{
+            width: 100%;
+            transition: width cubic-bezier(.17,.67,.83,.67) .3s;
+        }
+
+        &:focus + .inputRuller::before,
+        &:valid + .inputRuller::before,
+        &:hover + .inputRuller::before{
+            width: 0;
+            transition: width cubic-bezier(.17,.67,.83,.67) .3s;
+        }
+
+    }
+    .myInput.myTextArea{
+        background-color: $platinum;
+       opacity: 0.9;
+        height: 120px;
+        color: white;
+        
+    }
+
+    .myCheckbox {
+        display: inline-flex;
+        align-items: center;
+        align-self: flex-start;
+        width: fit-content;
+        cursor: pointer;
+        position: relative;
+    }
+    .checkbox-box {
+        width: .7em;
+        height: .7em;
+        border: 2px solid $camel;
+        border-radius: 3px;
+        @include mainFlex(center);
+        margin-right: 10px;
+        flex-shrink: 0;
+        transition: background 0.15s, border-color 0.15s;
+
+        &::after {
+            content: '\2714';
+            color: $platinum;
+            transform: scale(0);
+            transition: transform 0.15s;
+        }
+    }
+    .hidden-checkbox {
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+        left: -2px;
+    }
+    .hidden-checkbox:checked + .checkbox-box {
+        background: $coffe;
+        border-color: $coffe;
+    }
+    .hidden-checkbox:checked + .checkbox-box::after {
+        transform: scale(1);
+    }
+    
+
+    .mySelect {
+        width: 100%;
+        height: 55px;
+        background-color: $coffe;
+        border-radius: 5px;
+        text-transform: uppercase;
+        @include text(1.5rem, 500, none, $dutchWhite);
+        margin: 15px 0;
+        padding: 5px;
+        text-align-last: center;
+
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance:  none;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="50"><polygon points="0,0 100,0 50,50" style="fill:%23993C72;"/></svg>');
+        background-position: right 10px top 50%;
+        background-repeat: no-repeat;
+        background-size: 15px;
+
+
+        option {
+            background: $platinum;
+        }
+        
+        &:hover{
+            color: $camel;
+        }
+    }
+
+    .btnSecBack {
+        margin-top: 20px;
+        background: linear-gradient(to right, $camel, $tan);
+        width: 110px;
+        height: 36px;
+
+        .myBtnSec {
+            background-color: $dutchWhite;
+        }
+    }
+}
+
+.refund-form label{
+    display: inline-flex;
+    align-items: center;
+    text-align: start;
+    width: 100%;
+    cursor: pointer;
+}
+
+.cancel-form {
+    background-color: none;
+    background: none;
+    padding: 0;
+
+    .myBtnPri {
+        width: fit-content;
+    }
+}
+
+.inputRuller {
+    margin-bottom: 10px;
+    width: 100%;
+
+    &::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: $coffe;
+        transition: width cubic-bezier(.17,.67,.83,.67) .3s;
+        border-radius: 10px;
+        margin-bottom: -2px;
+    }
+    &::after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 3px;
+        background: rgb(100,73,54);
+        background: linear-gradient(90deg, rgba(100,73,54,1) 0%, rgba(164,131,100,1) 29%, 
+        rgba(193,151,112,1) 58%, rgba(205,178,146,1) 84%);
+        transition: width cubic-bezier(.17,.67,.83,.67) .3s;
+        border-radius: 10px;
+    }
+}
+.inputRuller.inputRullerError {  
+    &::before {
+        background: red;
+        height: 3px;
+    }
+    &::after {
+        background: red;
+        height: 3px;
+    }
+    
+}
+
+.accountForm {
+    width: 100%;
+    margin-bottom: 50px;
+    background: none;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 45% auto 45%;
+
+    .form-group {
+        width: 90%;
+
+        .myInput {
+
+            &:valid+.inputRuller::after {
+                width: 0%;
+                transition: width cubic-bezier(.17,.67,.83,.67) .3s;
+            }
+            &:focus+.inputRuller::after,
+            &:hover+.inputRuller::after {
+                width: 100%;
+                transition: width cubic-bezier(.17, .67, .83, .67) .3s;
+            }
+
+            &:valid+.inputRuller::before {
+                width: 100%;
+                transition: width cubic-bezier(.17,.67,.83,.67) .3s;
+            }
+            &:focus+.inputRuller::before,
+            &:hover+.inputRuller::before {
+                width: 0;
+                transition: width cubic-bezier(.17, .67, .83, .67) .3s;
+            }
+        }
+    }
+
+
+    .btn-form-group {
+        grid-column: 1/4;
+        margin-top: 50px;
+        @include mainFlex(space-between);
+
+        &.btn-form-group-shi {
+            justify-content: flex-end;
+        }
+        .btnSecBack {
+            width: 180px;
+            height: 40px;
+            background: linear-gradient(to right, $camel, $tan);
+    
+            .myBtnSec {
+                background-color: $platinum;
+            }
+        }
+        .myBtnPri {
+            width: 150px;
+            height: 40px;
+            background: $coffe;
+            background: linear-gradient(90deg, rgba(100,73,54,1) 40%, rgba(134,97,72,1) 100%);
+            color: $dutchWhite;
+            margin-right: 50px; 
+        }
+        
+    }
+
+    .form-group:nth-child(2) {
+        grid-column: 1/2;
+    }
+
+    .form-group:nth-child(3) {
+        grid-column: 3/4;
+    }
+}
+
+.accountAddressForm {
+
+    .form-group:nth-child(even) {
+        grid-column: 1/2;
+    }
+
+    .form-group:nth-child(odd) {
+        grid-column: 3/4;
+    }
+}
+
+.contact-form {
+    background: none;
+    padding: 0;
+    width: 55%;
+    margin-top: 10px;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .contactInput, .contactInputArea {
+        background: none;
+        border-radius: 10px;
+        border: 1px solid $coffe;
+        margin: 15px 0px ;
+        padding: 5px 10px;
+        font-size: 1.2rem;
+        width: 100%;
+        color: $coffe;
+    }
+    .contactInput {
+        height: 30px;
+    }
+
+    button {
+        @extend %myBtn;
+        @include text(1.3rem, 600, none, $coffe);
+        box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.205) inset;
+        border: 1px solid $coffe;
+        width: fit-content;
+        height: auto;
+        padding: 10px 15px;
+        font-family: $pri-font;
+        align-self: flex-end;
+        margin: 20px 0;
+    }
+}
+
+
+@include media("<=desktop") {
+    .contact-form {
+        width: 95%;
+    }
+}
+@include media("<=tablet") {
+    .accountForm {
+        grid-template-columns: 100%;
+
+        .form-group:nth-child(n) {
+            grid-column: 1/2;
+        }
+        .form-group {
+            width: 100%;
+        }
+    }
+}
+@include media("<=LGphone") {
+    .accountForm {
+           
+        .btn-form-group {
+    
+            .myBtnPri {
+                width: 100px;
+                height: 40px;
+            }
+            .btnSecBack {
+                width:160px;
+                height: 40px;
+            }
+        }
+    }
+}    
+        
+    

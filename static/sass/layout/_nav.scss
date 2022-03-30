@@ -1,0 +1,234 @@
+@use '../helpers' as *;
+@use '../basics' as *;
+
+
+.my-navBar {
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    padding: 15px;
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.329);
+    display: grid;
+    grid-template-columns: 20px 10% auto 10% 20px;
+    z-index: 12;
+
+    .navbar-brand {
+        grid-column: 2 / 3;
+        @include mainFlex(center);
+
+        .logo {
+            height: 3rem;
+            width: auto;
+            margin: 0 15px;
+        }
+        .logoName {
+            height: 1.8rem;
+            width: auto;
+        }
+    }
+    
+    .navbar-collapse{
+        grid-column: 3 / 4;
+        @include mainFlex(center);
+    }
+
+    .myNavLinks{    
+        @include mainFlex(center);
+        
+        .nav-item {
+            margin: 0 30px;
+            font-family: $sec-font;
+            display: inline-block;
+            position: relative;
+            @include ruller($camel);
+
+            .nav-link {
+                text-decoration: none;
+                @include text(1.1rem, 400, none, $coffe);
+
+                &:hover {
+                    color: $camel;
+                }
+                
+            }
+        }
+    }
+    .navIcons{
+        @include mainFlex(center);
+        .nav-icon {
+            margin: 0 15px;
+            color: $coffe;
+            
+            &:hover {
+                color: $camel;
+            }
+        }
+
+        .fa-user {
+            font-size: 1.1rem;
+        }
+
+        .verticalLine {
+            border-left: 2px solid $coffe;
+            height: 1.6rem;
+        }
+
+        .navCartOff {
+            width: 1.5rem;
+        }
+    }
+
+    .navBtnUser {    
+        grid-column: 4/5;
+        background: $tan;
+        background: linear-gradient(to bottom, $camel, $dutchWhite);
+        align-self: center;
+    }
+}
+
+.my-navBarNoUser {
+    grid-template-columns: 20px 10% auto 20%;
+
+    .myNavLinks{
+        margin-left: 70px;
+    }
+
+    .btnSecBack {
+        width: 120px;
+        height: 32px;
+        .myBtnSec {
+            background-color: white;
+        }
+    }
+
+    .btnWrapperNoUser {
+        grid-column: 4/5;
+        @include mainFlex(center);
+        
+        .navBtnUser {
+            margin: 0 10px
+        }
+    }
+}
+
+.menu-btn {
+    @include mainFlex(center);
+    position:fixed;
+    margin: 0px 0 20px 20px;
+    padding-top: 20px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+    display: none;
+    z-index: 15;
+    
+    .menu-btn__burger {
+        width: 50px;
+        height: 5px;
+        background: white;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(255,101,47,.2);
+        transition: all .5s ease-in-out;
+
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          width: 50px;
+          height: 5px;
+          background: white;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(255,101,47,.2);
+          transition: all .5s ease-in-out;
+        }
+
+        &::before {
+            transform: translateY(-16px);
+          }
+        &::after {
+          transform: translateY(16px);
+        }
+    }
+
+    /* ANIMATION */
+    &.open .menu-btn__burger {
+        transform: translateX(-50px);
+        background: transparent;
+        box-shadow: none;
+    }
+    &.open .menu-btn__burger::before {
+        transform: rotate(45deg) translate(35px, -35px);
+    }
+
+    &.open .menu-btn__burger::after {
+        transform: rotate(-45deg) translate(35px, 35px);
+    }
+}
+
+.side-menu-user {
+    width: 20%;
+    height: 100vh;
+    background: white;
+    position: fixed;
+    right: 0;
+    top: 0;
+    box-shadow: 
+       -3px 2px 3px #644936a2,
+       0 3px 2px -1px #644936a2;
+    opacity: 0;
+    z-index: -1;
+    display: hidden;
+
+    &.side-nav-open {
+        opacity: 1;
+        display: block;
+        z-index: 15;
+    }
+
+    .navbar-brand {
+        justify-content: flex-start;
+        margin: 20px 0 30px 0;
+    }
+    .navIcons {
+        justify-content: flex-start;
+    }
+    .myNavLinks {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 30px;
+
+        .nav-item {
+            margin: 20px 15px;
+        }
+    }
+    .side-nav-btn-user {    
+        background: linear-gradient(to right, $tan, $camel);
+    }
+    .myBtnSec {
+        background: white;
+        padding: 5px 15px;
+        width: fit-content;
+    }
+}
+
+
+@include media("<=desktop") {
+   
+    .menu-btn {
+        display: flex;
+    }
+    .main-nav {
+        display: none;
+    }
+}
+@include media("<=tablet") {
+    .side-menu-user {
+        width: 40%;
+    }
+}
+@include media("<=phone") {
+    .side-menu-user {
+        width: 70%;
+    }
+}

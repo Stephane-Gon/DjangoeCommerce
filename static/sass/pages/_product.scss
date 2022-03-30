@@ -1,0 +1,372 @@
+@use '../helpers'as *;
+@use '../basics'as *;
+@use '../layout'as *;
+
+.product-hero {
+    width: 80%;
+    height: fit-content;
+    margin: 50px auto 0 auto;
+    display: flex;
+
+    .error-product-slider {
+        width: 60%;
+        text-align: center;
+    }
+
+    .product-slider-wrapper {
+        width: 70%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        position: relative;
+
+        img {
+            width: 90%;
+            height: auto;
+            @extend %shaddow;
+        }
+
+        .product-slide {
+            width: 80%;
+            overflow-x: hidden;
+        }
+        .glider-prev {
+            position: absolute;
+            left: 5%;
+            bottom: 50%;
+        }
+        .glider-next {
+            position: absolute;
+            right: 5%;
+            bottom: 50%;
+        }
+        i{
+            font-size: 3rem;
+            color: $tan;
+        }
+    }
+
+    .product-info {
+        width: 30%;
+        display: grid;
+        grid-template-areas:
+        "title title"
+        "info1 btn1"
+        "info2 btn2";
+        overflow-wrap: break-word;
+
+        .mainHeading {
+            grid-area: title;
+        }
+        .product-spans {
+            grid-area: info1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 70%;
+            height: fit-content;
+            span {
+                @include mainFlex(space-around);
+                h2{
+                    font-family: $pri-font;
+                    @include text(1.7rem, 600, none, $coffe);
+                }
+                h3{
+                    @include text(1.7rem, 400, none, $coffe);
+                    margin-left:10px ;
+                }
+            }
+        }
+        .myBtnPri:first-of-type {
+            grid-area: btn1;
+            margin-top: 35px;
+            width: fit-content;
+            padding: 7px 20px 5px 20px;
+
+            &.update-cart-disabled {
+                pointer-events: none;
+                opacity: 0.6;
+            }
+
+            a {
+                font-size: 1rem;
+            }
+        }
+        .product-warning {
+            grid-area: info2;
+            width: 70%;
+        }
+        .myBtnPri:last-of-type {
+            grid-area: btn2;
+            font-size: 1rem;
+        }
+    }
+}
+
+.product-hero.hero-port {
+    height: 700px;
+
+    .product-slider-wrapper {
+        width: 60%;
+
+        img {
+            height: 100%;
+            width: auto;
+        }
+        .product-slide {
+            width: 50%;
+        }
+    }
+
+    .product-info {
+        width: 40%;
+    }
+}
+
+.product-switchable {
+    width: 60%;
+    margin: 100px auto;
+
+    .switch-titles {
+        @include mainFlex(center);
+
+        h1{ 
+            margin: 0 50px;
+            font-weight: 400;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        h1:last-of-type {
+            opacity: 0.6;
+        }
+    }
+    .switch-desc {
+        margin-top: 30px;
+        overflow-wrap: break-word;
+    }
+    .switch-reviews {
+        display: none;
+        margin-top: 30px;
+
+        .product-review {
+            margin: 10px 0;
+            background: $tan;
+            background: linear-gradient(70deg, $tan -10%, #CFC49E 55%, $dutchWhite 102%);
+            opacity: .85;
+            border-radius: 5px;
+            @extend %shaddow;
+            padding: 10px;
+
+            h2 {
+            font-family: $pri-font;
+            }
+            p{
+                margin-left: 10px;
+                overflow-wrap: break-word;
+
+            }
+            span{
+                @include mainFlex(space-between);
+            }
+        }
+
+        h1 {
+            margin-top: 50px;
+            font-weight: 400;
+        }
+        form {
+            padding: 15px 10px 5px 10px;
+            background: linear-gradient(70deg, $tan -10%, #CFC49E 55%, $dutchWhite 102%);
+            border-radius: 10px;
+        }
+        .addReviewInputArea {
+            @extend %shaddow;
+            border-radius: 10px;
+            width: 98%;
+            background-color: $platinum;
+            border: none;
+            padding: 5px 10px;
+            font-size: 1rem;
+            color: &coffe;
+        }
+        h3 {
+            align-self: flex-start;
+            font-weight: 400;
+            margin-top: 10px;
+            margin-bottom: -5px;
+        }
+        .myBtnPri {
+            background: $dutchWhite;
+        }
+    }
+}
+
+.product-details {
+    width: 70%;
+    margin: 0 auto;
+
+    p {
+        font-size: 1.3rem;
+    }
+    p:last-of-type {
+        display: inline-block;
+    }
+    .fa-star {
+        font-size: 1.2rem;
+        margin-left: 5px;
+    }
+    span {
+        font-size: 1.3rem;
+    }
+}
+
+.identical-items-slide {
+    width: 70%;
+    margin: 50px auto;
+    
+    h1 {
+        font-size: 2.1rem;
+        margin: 50px auto;
+        text-align: center;
+    }
+
+    .card-slider {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@include media("<=desktop") {
+    .product-hero {
+        width: 100%;
+        .product-slider-wrapper {
+            .glider-prev, 
+            .glider-next {
+                display: none;
+            }
+            
+            .product-slide {
+                width: 90%;
+            }
+        }
+        .error-product-slider {
+            width: 95%;
+        }
+        
+    }
+    
+    .identical-items-slide {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+}
+
+@include media("<=1000px") {
+    .card-slider {
+
+        a:last-of-type {
+            display: none;
+        }
+
+        a {
+            width: 35%;
+            .product-card {
+                width: 100%;
+            }
+        }
+    }    
+    .product-hero {
+        .product-slider-wrapper {
+            width: 60%;
+        }
+        .product-info {
+            width: 40%;
+        }
+    }
+    
+}
+
+@include media("<=tablet") {
+    .card-slider {
+        flex-direction: column;
+        a:last-of-type {
+            display: block;
+        }
+
+        a {
+            margin: 30px auto;
+            width: 50%;
+        }
+    }    
+    .product-hero {
+        flex-direction: column;
+        align-items: center;
+
+        .product-slider-wrapper {
+            width: 100%;
+        }
+        .product-info {
+            width: 90%;
+            justify-content: space-between;
+
+        }
+    }
+    .product-hero.hero-port {
+        height: fit-content;
+        .product-slider-wrapper {
+            width: 90%;
+
+            .product-slide {
+                width: 100%;
+            }
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+        .product-info {
+            width: 90%;
+        }
+    }
+    .product-switchable,
+    .product-details {
+        width: 90%;
+    }
+}
+
+@include media("<=LGphone") {
+    .product-hero .product-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-switchable {
+        .switch-titles {
+            flex-direction: column;
+            h1 {
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    .card-slider {
+        a {
+            width: 70%;
+        }
+    } 
+}
+
+@include media("<=phone") {
+    .product-hero .product-info {
+        width: 95%;
+    }
+    .card-slider {
+        a {
+            width: 90%;
+        }
+    } 
+}

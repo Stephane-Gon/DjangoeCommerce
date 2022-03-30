@@ -1,0 +1,401 @@
+@use '../helpers' as *;
+
+.info-ruller {
+   height: 3px;
+   margin: 5px 0px 15px 0px;
+   background: $tan;
+   background: linear-gradient(221deg, rgba(193,151,112,1) 48%, rgba(213,184,149,1) 74%);;
+}
+
+.tags {
+   padding: 5px;
+   border-radius: 5px;
+   transition: ease-in 0.15s;
+   @include text(1.5rem, 400, none, $dutchWhite);
+   width: fit-content;
+   height: fit-content;
+
+   &:hover {
+      transform: scale(0.95);
+      cursor: pointer;
+   }
+
+   &.tag-N {
+      background: rgb(94, 172, 94);
+   }
+
+   &.tag-S {
+      background: rgb(113, 177, 230);
+   }
+
+   &.tag-L {
+      background: rgb(54, 58, 112);
+   }
+
+   &.tag-O {
+      background: rgb(36, 109, 93);
+   }
+}
+
+.footer-gap {
+   padding: 100px 0 120px 0;
+}
+
+
+.heroBox {
+   position: relative;
+   top: -35px;
+   width: 100%;
+
+   .heroHeader {
+      z-index: 1;
+      position: absolute;
+      top: 55%;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: $platinum;
+  }
+
+  .heroBtn {
+      width: 180px;
+      z-index: 2;
+      position: absolute;
+      margin: auto;
+      left: 0;
+      right: 0;
+      top: 65%;
+  }
+
+  .heroSlogan {
+   @extend %shaddow;
+   @extend %columnFlex;
+   @extend %absoluteCenter;
+   background-color: $tan;
+   opacity: 0.8;
+   border-radius: 5px;  
+   text-align: center;
+   width: 600px;
+   height: 160px;
+
+   h2 {
+      margin-top: 10px;
+   }
+  }
+}
+
+.socialInfo {
+   @include mainFlex(center);
+
+   i {
+      margin: 0 20px;
+      font-size: 1.5rem;
+   }
+}
+
+
+.summary-wrapper {
+   margin-left: 10px;
+   background: #d5b895b6;
+   background: linear-gradient(45deg, #d5b8958a -5%, #cfc49e8c 55%, #e8dcb58c 102%);
+   padding: 10px;
+
+   h2 {
+       font-size: 2.2rem;
+   }
+   p {
+       font-size: 1.3rem;
+       margin-left: 20px;
+   }
+
+   .myBtnPri {
+       margin: 50px auto 0 auto;
+   }
+}
+
+#consent-popup{
+   position: fixed;
+   @include mainFlex(space-between);
+   bottom: 0;
+   left: 0;
+   right: 0;
+   padding: 2rem 8rem;
+   background: $tan;
+   background: linear-gradient(45deg, $dutchWhite 5%, $tan 70%, $camel 110%);
+   transition: opacity 1s ease;
+   z-index: 20;
+
+   .cookie-pref-link {
+      color: $darkSlate;
+   }
+
+   .myBtnPri {
+      background: $dutchWhite;
+      background: linear-gradient(45deg, $tan 5%, $dutchWhite 100%);
+   }
+
+   &.consent-hidden {
+       opacity: 0;
+       z-index: -10;
+   }
+}
+
+.cookie-pref-aside{
+   width: 15%;
+   height: 100vh;
+   background: $dutchWhite;
+   background: linear-gradient(180deg, $dutchWhite 5%, $tan 70%);
+   position: fixed;
+   z-index: 11;
+   right: 0;
+   top: 0;
+   transition: display 1s ease;
+   box-shadow: 
+      -3px 2px 3px #644936a2,
+      0 3px 2px -1px #644936a2;
+
+   &.cookie-pref-hidden {
+      display: none;
+   }
+
+   .cookie-pref-nav {
+      margin-top: 30%;
+      padding: 5px;
+      @include mainFlex(space-between);
+
+      .mainHeading{
+         font-size: 1.8rem;
+      }
+
+      .fa-times {
+         font-size: 1.4rem;
+         cursor: pointer;
+      }
+   }
+
+   p {
+      padding: 5px;
+   }
+
+   hr {
+      color: #644936;
+      background-color: #644936;
+      border-width:0;
+      height: 2px;
+      width: 95%;
+      margin: 0 auto
+   }
+   .cookie-field {
+      @include mainFlex(space-between);
+      padding: 5px;
+      margin-top: 20px;
+
+      h4 {
+         font-size: 1.1rem;
+      }
+   }
+
+   .switch-field {
+      display: flex;
+      overflow: hidden;
+      
+
+      input {
+         position: absolute !important;
+         clip: rect(0, 0, 0, 0);
+         height: 1px;
+         width: 1px;
+         border: 0;
+         overflow: hidden;
+      }
+      input:checked + label{
+         background-color: $tan;
+         box-shadow: none;
+      }
+      
+      label {
+         background-color: #e4e4e4;
+         color: rgba(0, 0, 0, 0.6);
+         font-size: 14px;
+         line-height: 1;
+         text-align: center;
+         padding: 8px 16px;
+         margin-right: -1px;
+         border: 1px solid rgba(0, 0, 0, 0.2);
+         box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+         transition: all 0.1s ease-in-out;
+
+         &:first-of-type {
+            border-radius: 4px 0 0 4px;
+            
+            &:hover {
+               cursor: pointer;
+            }
+         }
+         
+         &:last-of-type {
+            border-radius: 0 4px 4px 0;
+         }
+      }
+   }
+
+}
+
+.paginator-links {
+   grid-column: 1 / -1;
+   margin: 75px auto 0 auto;
+   background-color: $dutchWhite;
+   border-radius: 50px;
+   padding: 5px 15px;
+   @include mainFlex(space-around);
+
+   span {
+       display: inline;
+       background-color: $coffe;
+       opacity: 0.9;
+       border-radius: 50%;
+       text-align: center;
+       margin: 0 10px;
+       width: 2.3rem;
+       height: 2.3rem;
+
+       .paginator-current{
+           @include text(1.8rem, 600, none, $dutchWhite);
+           font-family: $pri-font;
+           text-decoration: none;
+       }
+   }
+   .paginator-link{
+       @include text(1.5rem, 400, none, $coffe);
+       font-family: $sec-font;
+       margin: 0 10px;
+       text-decoration: none;
+   }
+   .fa{
+       color: $coffe;
+       font-size: 1.5rem;
+       margin: 0 5px;
+   }
+}
+
+.card-slider {
+
+   &.draggable .glider-slide img
+   {
+       pointer-events: all;
+   }
+
+   a {
+      text-decoration: none;
+      color: $coffe;
+      width: 25%;
+      margin: 0 50px;
+   }
+   .product-card {
+      margin-bottom: 5px;
+      min-height: 394px;
+      background: $tan;
+      background: linear-gradient(75deg, $dutchWhite 0%, $camel 48%, $coffe 98%);
+      border-radius: 10px;
+      @extend %shaddow;
+   
+      &:hover {
+         cursor: pointer;
+      }
+   
+      img{
+         width: 98%;
+         height: 250px;
+         border-radius: 40%;
+         @extend %shaddow;
+         margin: 1%;
+         transition: all .1s cubic-bezier(.17,.67,.83,.67);
+   
+         &:hover {
+            border-radius: 10px;
+         }
+      }
+   
+      .card-text {
+   
+         h2 {
+            margin: 8px 0 15px 5px;
+            font-family: $pri-font;
+            @include text(1.6rem, 600, none, &coffe);
+         }
+   
+         h3:first-of-type {
+            margin-left: 5px;
+            @include text(1.3rem, 400, none, &coffe);
+         }
+         
+         div {
+            @include mainFlex(space-between);
+            margin-top: 10px;
+            padding: 8px;
+            @include text(1.1rem, 400, none, $dutchWhite);
+            position: relative;
+
+            h3 {
+               position: absolute;
+               right: 5px;
+               bottom: 5px;
+            }
+
+            span {
+               padding: 5px;
+               border-radius: 5px; 
+               transition: ease-in 0.15s;
+               font-size: 1.1rem;
+            }
+         }
+         
+      }
+   }
+}
+
+@include media("<=LGdesktop") {
+   .cookie-pref-aside {
+      width: 20%;
+   }
+}
+
+@include media("<=desktop") {
+   .cookie-pref-aside {
+      width: 25%;
+   }
+   .footer-gap {
+      padding-top: 80px;
+   }
+}
+
+@include media("<=tablet") {
+   .footer-gap {
+      padding: 80px 0 300px 0;
+   }
+
+   #consent-popup{
+      flex-direction: column;
+   }
+   .cookie-pref-aside {
+      width: 50%;
+   }
+   .heroBox .heroSlogan {
+      width: 70%;
+   }
+
+   .card-slider div a .product-card {
+      margin: 0 auto;
+   }
+}
+
+@include media("<=phone") {
+   .cookie-pref-aside {
+      width: 100%;
+   }
+
+   .card-slider div a .product-card {
+      margin: 0 auto;
+      width: 90%;
+   }
+}

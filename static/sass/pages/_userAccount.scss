@@ -1,0 +1,154 @@
+@use '../helpers' as *;
+@use '../basics' as *;
+@use '../layout' as *;
+
+
+.userAccountNav {
+    background-color: $dutchWhite;
+    width: 70%;
+    height: 50px;
+    border-radius: 50px;
+    @include mainFlex(space-around);
+    position: relative;
+
+    .userNavLink {
+        font-weight: 600;
+        border-radius: 50px;
+        width: 33%;
+        height: 50px;
+        text-align: center;
+        cursor: pointer;
+        @extend %columnFlex;
+        position: relative;
+
+        &:hover {
+            background-color: $coffe;
+            opacity: .1;
+            color: $dutchWhite;
+        }
+
+    }
+
+    .userNavLink.active-link{
+        color: $dutchWhite;
+        transition: all ease-in 0.4s;
+    }
+
+    .user-marker {
+        background-color: $coffe;
+        cursor: auto;
+
+        border-radius: 50px;
+        width: 33%;
+        height: 50px;
+        text-align: center;
+        transition: all ease-in 0.3s;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+}
+
+
+.profile-account-wrapper {
+
+    .info-grid1 {
+        display: grid;
+        grid-template-columns: 45% auto 45%;
+        grid-template-rows: 3;
+    
+        .info-wrapper:nth-child(1) {
+            grid-column: 1/2;
+        }
+        .info-wrapper:nth-child(2) {
+            grid-column: 3/4;
+        }
+        .info-wrapper:nth-child(3) {
+            grid-column: 1/4;
+        }
+    }
+    .info-grid2 {
+        display: grid;
+        grid-template-columns: 45% auto 45%;
+        grid-template-rows: 4;
+    
+        .info-wrapper:nth-child(odd) {
+            grid-column: 1/2;
+        }
+        .info-wrapper:nth-child(even) {
+            grid-column: 3/4;
+        }
+    }
+    .profile-info-wrapper {
+        width: 95%;
+        margin: 10px;
+
+        h4 {
+            @include text(1.3rem, 400, none, $coffe)
+        }
+    }
+}
+
+
+.profile-change-wrapper, .profile-orders-wrapper {
+    display: none;
+}
+
+
+@include media("<=desktop") {
+    .userAccountNav {
+        width: 80%;
+    }
+}
+@include media("<=tablet") {
+    .userAccountNav {
+        width: 100%;
+        .userNavLink {
+            font-size: 1.1rem;
+        }
+    }
+
+    .profile-orders-wrapper .user-wrapper {
+        margin-bottom: 30px;
+        box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.5);
+        background: linear-gradient(20deg, rgba(164,131,100, 0.9) 19%, rgba(193,151,112,0.9) 48%, rgba(213,184,149,0.9) 74%);;
+        border-top: 1px solid #64493642;
+        border-left: 1px solid #644936cb;
+        
+        a {
+            color: $coffe;
+        }
+    }
+    
+}
+@include media("<=LGphone") {
+    .userAccountNav {
+        .userNavLink {
+            font-size: 1rem;
+        }
+    }
+
+    .profile-account-wrapper {
+        .info-grid1 {
+            grid-template-columns: 100%;
+            grid-template-rows: 1;
+            .info-wrapper:nth-child(1), 
+            .info-wrapper:nth-child(2),
+            .info-wrapper:nth-child(3)  {
+                grid-column: 1/2;
+            }
+        }
+
+        .info-grid2 {
+            grid-template-columns: 100%;
+            grid-template-rows: 1;
+        
+            .info-wrapper:nth-child(odd),
+            .info-wrapper:nth-child(even) {
+                grid-column: 1/2;
+            }
+        }
+    }
+    
+}

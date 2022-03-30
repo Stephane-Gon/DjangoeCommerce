@@ -1,0 +1,192 @@
+@use '../helpers' as *;
+@use '../basics' as *;
+@use '../layout' as *;
+
+.test {
+    display: flex;
+    width: 85%;
+    margin: 50px auto;
+}
+
+    
+.categorie-navbar {
+        padding: 20px;
+        background: $dutchWhite;
+        background: linear-gradient(275deg, $dutchWhite 2%, $tan 35%, $camel) 105%;
+        opacity: .9;
+        z-index: 10;
+        width: fit-content;
+        height: fit-content;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.13);
+
+        .hide-navBar {
+            @include mainFlex(center);
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            display: none;
+
+            i {
+                margin-right: 15px; 
+            }
+        }
+
+        .cat-nav-brand {
+            @include mainFlex(center);
+            margin-bottom: 20px;
+            background-color: #644936e7;
+            padding: 10px 15px;
+            -moz-box-shadow: inset 3px 3px 5px 2px rgba(0, 0, 0, 0.329);
+            -webkit-box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.329);
+            box-shadow: inset 3px 3px 5px 2px rgba(0, 0, 0, 0.329);
+        }
+
+        h3 {
+            @include text(1.5rem, 400, italic, $coffe);
+            margin-bottom: 20px;
+        }
+
+        .cat-nav-item {
+            position: relative;
+            width: fit-content;
+            @include ruller($dutchWhite);
+            margin: 15px 0 15px 7px;
+
+            &:hover {
+                cursor: pointer;
+            } 
+            a {
+                text-decoration: none;
+                color: $coffe;
+            }
+        }  
+        .cat-active {
+            position: relative;
+            width: fit-content;
+            margin: 15px 0 15px 7px;
+            color: $dutchWhite;
+
+            ::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 2px;
+                background-color: $dutchWhite;
+            }
+        } 
+}
+
+.categorie-tooltip {
+    @extend %columnFlex;
+    padding: 10px;
+    position: fixed;
+    background: $dutchWhite;
+    background: linear-gradient(275deg, $dutchWhite 2%, $tan 35%, $camel) 105%;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 3px 4px 4px rgba(0, 0, 0, 0.13);
+    display: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    .vertical-text {
+        writing-mode: vertical-lr;
+        font-size: 1.2rem;
+    }
+    i {
+        font-size: 2rem;
+    }
+}
+
+.product-wrapper {
+    width: 75%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    // height: fit-content;
+
+    .mainHeading {
+        grid-column: 1 / 4;
+        margin: 50px auto
+    }
+
+    .sec-product-card {
+        @extend %shaddow;
+        background-color: $dutchWhite;
+        width: 90%;
+
+        .card-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .card-mini-box {
+            @include mainFlex(space-between);
+            width: 95%;
+            margin: 10px auto;
+
+            .card-cart {
+                width: 1.8rem;
+            }
+        }
+    }
+    
+}
+
+@include media("<=desktop") {
+    .test {
+        width: 95%;
+
+        .product-wrapper {
+            grid-template-columns: 1fr 1fr;
+            width: 65%;
+    
+            .sec-product-card {
+                width: 100%;
+            }
+        }
+    }
+    
+}
+
+@include media("<=tablet") {
+    .test .product-wrapper {
+        grid-template-columns: 1fr;
+        margin-left: 20px; 
+    }
+}
+
+@include media("<=LGphone") {
+   
+    .test {
+        width: 100%;
+        .categorie-navbar {
+            display: none;
+
+            .hide-navBar {
+                display: flex;
+            }
+        }
+        
+        .categorie-tooltip {
+            display: block;
+        }
+
+        .product-wrapper {
+            width: 80%;
+            margin: 0 auto;
+
+            .mainHeading {
+                margin-left: 15px;
+                font-size: 2rem;
+            }
+        }
+    }
+}
