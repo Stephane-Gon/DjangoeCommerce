@@ -13,7 +13,7 @@
   margin: auto;
 }
 
-.phone-contact-info-wrapper, .phone-overlay .phone-overlay-panel, .categorie-tooltip, .userAccountNav .userNavLink, .overlay .overlay-panel, .heroBox .heroSlogan, .main-container, .user-wrapper, .profile-wrapper, form, form .form-group {
+.container404 .phone404error, .phone-contact-info-wrapper, .phone-overlay .phone-overlay-panel, .categorie-tooltip, .userAccountNav .userNavLink, .overlay .overlay-panel, .heroBox .heroSlogan, .main-container, .user-wrapper, .profile-wrapper, form, form .form-group {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -3268,218 +3268,166 @@ h5 {
     width: 95%;
   }
 }
+.st1 {
+  font-size: 5.18rem;
+}
+
+.st2 {
+  fill: #e8dcb5;
+}
+
 .mainBox404 {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-  padding: 12px;
+  background-color: #314848;
   height: 100vh;
-  background: #314848;
-  color: #e8dcb5;
-  font-family: "Source Sans Pro", sans-serif;
-  font-size: 3rem;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-}
-
-::selection {
-  background: none;
-}
-
-.link404 {
-  display: block;
-  animation: pulseColor 1000ms linear 3100ms forwards;
-  font-weight: 500;
-}
-.link404:hover b, .link404:focus b {
-  color: #e8dcb5;
-}
-.link404:active b {
-  color: #D5B895;
-}
-
-svg {
-  width: 50px;
-  height: auto;
-}
-
-.crack {
-  position: relative;
-  z-index: 4;
-  margin-left: -50px;
-}
-.crack polyline {
-  fill: none;
-  stroke: red;
-  stroke-width: 10px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 1649.099;
-  stroke-dashoffset: 1649.099;
-  animation: drawStroke 1500ms ease-out 500ms forwards;
-}
-
-.scndBox404 {
+  width: 100vw;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  align-content: center;
-}
-.scndBox404 > div {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.scndBox404 > div svg {
-  position: relative;
-  z-index: 1;
-}
-.scndBox404 > div svg polygon {
-  fill: #314848;
-}
-.scndBox404 > div span {
-  display: block;
-  position: relative;
-  z-index: 0;
-  padding: 0 12px;
-  line-height: 1.4;
-}
-.scndBox404 > div:first-child {
-  text-align: right;
-  z-index: 1;
-}
-.scndBox404 > div:first-child span:first-child {
-  opacity: 0;
-  transform: translateX(100%);
-  animation: translateLeft 1000ms linear 1250ms forwards;
-}
-.scndBox404 > div:first-child span:last-child {
-  opacity: 0;
-  transform: translateX(100%);
-  animation: translateLeft 1000ms linear 1450ms forwards;
-}
-.scndBox404 > div:first-child svg polygon {
-  animation: removeFill 10ms ease-out 1600ms forwards;
-}
-.scndBox404 > div:last-child {
-  z-index: 0;
-  margin-left: -50px;
-}
-.scndBox404 > div:last-child span:first-child {
-  opacity: 0;
-  transform: translateX(-100%);
-  animation: translateRight 1000ms linear 1650ms forwards;
-}
-.scndBox404 > div:last-child span:last-child {
-  opacity: 0;
-  transform: translateX(-100%);
-  animation: translateRight 1000ms linear 1850ms forwards;
 }
 
-@keyframes drawStroke {
+.container404 {
+  text-align: center;
+}
+.container404 .phone404error {
+  color: #e8dcb5;
+  display: none;
+}
+.container404 .phone404error .phone404code {
+  font-size: 10rem;
+  font-weight: 600;
+  margin: 0;
+}
+.container404 .phone404error .phone404text {
+  font-size: 5rem;
+  margin: 0 0 40px 0;
+}
+.container404 .svg404 {
+  width: 31.25rem;
+  height: 25rem;
+  text-align: center;
+  fill: #D5B895;
+}
+.container404 .svg404 path#XMLID_5_ {
+  fill: #e8dcb5;
+  filter: url(#blurFilter4);
+}
+.container404 .svg404 path#XMLID_11_,
+.container404 .svg404 path#XMLID_2_ {
+  fill: #e8dcb5;
+}
+.container404 .svg404 .circle {
+  animation: out 2s infinite ease-out;
+  fill: #e8dcb5;
+}
+.container404 .message404 {
+  color: #e8dcb5;
+}
+.container404 .message404:after {
+  content: "]";
+}
+.container404 .message404:before {
+  content: "[";
+}
+.container404 .message404:after, .container404 .message404:before {
+  color: #e8dcb5;
+  font-size: 1.25rem;
+  -webkit-animation-name: opacity;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: opacity;
+  animation-name: opacity;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  margin: 0 50px;
+}
+.container404 .text404 {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  color: #C19770;
+}
+.container404 .text404 .link404 {
+  color: #e8dcb5;
+  animation: pulseColor 1800ms linear 3100ms forwards;
+  animation-delay: 100ms;
+}
+
+@-webkit-keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes out {
   0% {
-    stroke-dashoffset: 1649.099;
+    r: 1;
+    opacity: 0.9;
+  }
+  25% {
+    r: 5;
+    opacity: 0.3;
+  }
+  50% {
+    r: 10;
+    opacity: 0.2;
+  }
+  75% {
+    r: 15;
+    opacity: 0.1;
   }
   100% {
-    stroke-dashoffset: 0;
-  }
-}
-@keyframes removeFill {
-  0% {
-    fill: #314848;
-  }
-  100% {
-    fill: rgba(49, 72, 72, 0);
+    r: 20;
+    opacity: 0;
   }
 }
 @keyframes pulseColor {
   0% {
-    color: #D5B895;
+    color: #e8dcb5;
   }
   25% {
     color: #644936;
   }
   50% {
-    color: #D5B895;
+    color: #e8dcb5;
   }
   75% {
     color: #644936;
   }
   100% {
-    color: #D5B895;
+    color: #e8dcb5;
   }
 }
-/* https://goo.gl/v323yz */
-@keyframes translateLeft {
-  0% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 150, 0, 0, 1);
-    opacity: 1;
-  }
-  7.61% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 69.561, 0, 0, 1);
-  }
-  11.41% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 39.355, 0, 0, 1);
-  }
-  15.12% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 17.801, 0, 0, 1);
-  }
-  18.92% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 3.02, 0, 0, 1);
-  }
-  22.72% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -5.661, 0, 0, 1);
-  }
-  30.23% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -10.852, 0, 0, 1);
-  }
-  50.25% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -2.282, 0, 0, 1);
-  }
-  70.27% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.519, 0, 0, 1);
-  }
-  100% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-    opacity: 1;
+@media (max-width: 1366px) {
+  .mainBox404 {
+    margin-top: -35px;
   }
 }
-/* https://goo.gl/p1Hnde */
-@keyframes translateRight {
-  0% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -150, 0, 0, 1);
-    opacity: 1;
+@media (max-width: 500px) {
+  .svg404 {
+    display: none;
   }
-  7.61% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -69.561, 0, 0, 1);
+
+  .container404 .phone404error {
+    display: block;
   }
-  11.41% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -39.355, 0, 0, 1);
+  .container404 .text404 {
+    font-size: 1rem;
   }
-  15.12% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -17.801, 0, 0, 1);
-  }
-  18.92% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -3.02, 0, 0, 1);
-  }
-  22.72% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 5.661, 0, 0, 1);
-  }
-  30.23% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 10.852, 0, 0, 1);
-  }
-  50.25% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2.282, 0, 0, 1);
-  }
-  70.27% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.519, 0, 0, 1);
-  }
-  100% {
-    transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-    opacity: 1;
+  .container404 .message404:after, .container404 .message404:before {
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    margin: 0 20px;
   }
 }
 
