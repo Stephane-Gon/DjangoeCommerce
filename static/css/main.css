@@ -3293,7 +3293,7 @@ h5 {
   font-weight: 500;
 }
 .link404:hover b, .link404:focus b {
-  color: red;
+  color: #e8dcb5;
 }
 .link404:active b {
   color: #D5B895;
