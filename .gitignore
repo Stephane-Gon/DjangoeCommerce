@@ -12,6 +12,7 @@ media
 
 ### Sass ###
 sass
+sass/
 *.css.map
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
