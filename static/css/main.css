@@ -3270,12 +3270,13 @@ h5 {
 }
 .mainBox404 {
   display: flex;
+  justify-content: space-around;
   align-items: center;
   align-content: center;
-  justify-content: center;
   padding: 12px;
-  background: #343434;
-  color: white;
+  height: 100vh;
+  background: #644936;
+  color: #D5B895;
   font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 24px;
   text-rendering: optimizeLegibility;
@@ -3288,7 +3289,6 @@ h5 {
 
 .link404 {
   display: block;
-  cursor: pointer;
   animation: pulseColor 1000ms linear 3100ms forwards;
   font-weight: 500;
 }
@@ -3296,7 +3296,7 @@ h5 {
   color: #F04F54;
 }
 .link404:active b {
-  color: #43CB9D;
+  color: #C19770;
 }
 
 svg {
@@ -3322,9 +3322,9 @@ svg {
 
 .scndBox404 {
   display: flex;
+  justify-content: space-around;
   align-items: center;
   align-content: center;
-  justify-content: center;
 }
 .scndBox404 > div {
   display: flex;
@@ -3338,7 +3338,7 @@ svg {
   z-index: 1;
 }
 .scndBox404 > div svg polygon {
-  fill: #343434;
+  fill: #D5B895;
 }
 .scndBox404 > div span {
   display: block;
