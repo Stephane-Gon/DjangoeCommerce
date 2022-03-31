@@ -3273,10 +3273,11 @@ h5 {
   justify-content: space-around;
   align-items: center;
   align-content: center;
+  padding: 12px;
   height: 100vh;
   background: #314848;
   color: #D5B895;
-  font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 24px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -3292,7 +3293,7 @@ h5 {
   font-weight: 500;
 }
 .link404:hover b, .link404:focus b {
-  color: #F04F54;
+  color: red;
 }
 .link404:active b {
   color: #C19770;
@@ -3310,7 +3311,7 @@ svg {
 }
 .crack polyline {
   fill: none;
-  stroke: #F04F54;
+  stroke: red;
   stroke-width: 10px;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -3388,10 +3389,10 @@ svg {
 }
 @keyframes removeFill {
   0% {
-    fill: #343434;
+    fill: #314848;
   }
   100% {
-    fill: rgba(52, 52, 52, 0);
+    fill: rgba(49, 72, 72, 0);
   }
 }
 @keyframes pulseColor {
@@ -3399,13 +3400,13 @@ svg {
     color: white;
   }
   25% {
-    color: #43CB9D;
+    color: #C19770;
   }
   50% {
     color: white;
   }
   75% {
-    color: #43CB9D;
+    color: #C19770;
   }
   100% {
     color: white;
