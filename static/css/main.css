@@ -3273,9 +3273,8 @@ h5 {
   justify-content: space-around;
   align-items: center;
   align-content: center;
-  padding: 12px;
   height: 100vh;
-  background: #644936;
+  background: #314848;
   color: #D5B895;
   font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro", "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
   font-size: 24px;
@@ -3338,7 +3337,7 @@ svg {
   z-index: 1;
 }
 .scndBox404 > div svg polygon {
-  fill: #D5B895;
+  fill: #314848;
 }
 .scndBox404 > div span {
   display: block;
