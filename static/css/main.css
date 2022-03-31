@@ -3268,23 +3268,6 @@ h5 {
     width: 95%;
   }
 }
-*, *:before, *:after {
-  box-sizing: border-box;
-}
-
-* {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  transform-style: preserve-3d;
-}
-
-*:focus {
-  outline: none !important;
-}
-
-body, html {
-  height: 100%;
-}
-
 .mainBox404 {
   display: flex;
   align-items: center;
