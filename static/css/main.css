@@ -3476,7 +3476,7 @@ h5 {
   background: #314848;
 }
 
-h1 {
+.error500code {
   --distance: .01em;
   --dist-factor: 1;
   position: relative;
@@ -3489,10 +3489,10 @@ h1 {
   color: #dfcaa5;
   filter: saturate(150%);
 }
-h1 > [data-overlay] {
+.error500code > [data-overlay] {
   position: relative;
 }
-h1 > [data-overlay]::after {
+.error500code > [data-overlay]::after {
   --dist-factor: 32;
   content: attr(data-overlay);
   position: absolute;
@@ -3506,12 +3506,12 @@ h1 > [data-overlay]::after {
   color: #C19770;
   font-size: 0.125em;
 }
-h1, h1::after,
-h1 [data-overlay]::after {
+.error500code, .error500code::after,
+.error500code [data-overlay]::after {
   backface-visibility: hidden;
   animation: animText 3s linear infinite;
 }
-h1::after {
+.error500code::after {
   --dist-factor: 2;
   content: attr(data-txt);
   position: absolute;
@@ -3520,7 +3520,7 @@ h1::after {
   color: #dfcaa5;
   mix-blend-mode: screen;
 }
-h1::after, h1 [data-overlay]:first-child::after {
+.error500code::after, .error500code [data-overlay]:first-child::after {
   animation-direction: reverse;
 }
 
