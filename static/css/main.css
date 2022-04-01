@@ -13,7 +13,7 @@
   margin: auto;
 }
 
-.container404 .phone404error, .phone-contact-info-wrapper, .phone-overlay .phone-overlay-panel, .categorie-tooltip, .userAccountNav .userNavLink, .overlay .overlay-panel, .heroBox .heroSlogan, .main-container, .user-wrapper, .profile-wrapper, form, form .form-group {
+.error500box, .phoneCustomerror, .phone-contact-info-wrapper, .phone-overlay .phone-overlay-panel, .categorie-tooltip, .userAccountNav .userNavLink, .overlay .overlay-panel, .heroBox .heroSlogan, .main-container, .user-wrapper, .profile-wrapper, form, form .form-group {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,6 +57,86 @@
 * Testing
 *
 **/
+@-webkit-keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes out {
+  0% {
+    r: 1;
+    opacity: 0.9;
+  }
+  25% {
+    r: 5;
+    opacity: 0.3;
+  }
+  50% {
+    r: 10;
+    opacity: 0.2;
+  }
+  75% {
+    r: 15;
+    opacity: 0.1;
+  }
+  100% {
+    r: 20;
+    opacity: 0;
+  }
+}
+@keyframes pulseColor {
+  0% {
+    color: #e8dcb5;
+  }
+  25% {
+    color: #644936;
+  }
+  50% {
+    color: #e8dcb5;
+  }
+  75% {
+    color: #644936;
+  }
+  100% {
+    color: #e8dcb5;
+  }
+}
+@keyframes pulseFont {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  75% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes animText {
+  0% {
+    transform: rotate(0deg) translate(calc(var(--distance) * -1 * var(--dist-factor)), calc(var(--distance) * -1 * var(--dist-factor))) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translate(calc(var(--distance) * -1 * var(--dist-factor)), calc(var(--distance) * -1 * var(--dist-factor))) rotate(-360deg);
+  }
+}
 .myBtnPri {
   margin: 10px 0;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.329);
@@ -787,6 +867,43 @@ h5 {
   background: linear-gradient(221deg, #c19770 48%, #d5b895 74%);
 }
 
+.errorCodeP {
+  color: #C19770;
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  color: #C19770;
+}
+.errorCodeP .errorCodeLink {
+  color: #e8dcb5;
+  animation: pulseColor 1800ms linear 100ms 1;
+}
+
+.errorBracketText {
+  margin-top: 3rem;
+  color: #e8dcb5;
+}
+.errorBracketText:after {
+  content: "]";
+}
+.errorBracketText:before {
+  content: "[";
+}
+.errorBracketText:after, .errorBracketText:before {
+  color: #e8dcb5;
+  font-size: 1.25rem;
+  -webkit-animation-name: opacity;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: opacity;
+  animation-name: opacity;
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  margin: 0 50px;
+}
+
 .tags {
   padding: 5px;
   border-radius: 5px;
@@ -1139,6 +1256,17 @@ h5 {
 
   .card-slider div a .product-card {
     margin: 0 auto;
+  }
+}
+@media (max-width: 500px) {
+  .errorBracketText:after, .errorBracketText:before {
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    margin: 0 20px;
+  }
+
+  .errorCodeP {
+    font-size: 1rem;
   }
 }
 @media (max-width: 360px) {
@@ -3285,22 +3413,23 @@ h5 {
   align-items: center;
 }
 
-.container404 {
-  text-align: center;
-}
-.container404 .phone404error {
+.phoneCustomerror {
   color: #e8dcb5;
   display: none;
 }
-.container404 .phone404error .phone404code {
+.phoneCustomerror .phoneErrorcode {
   font-size: 10rem;
   font-weight: 600;
   margin: 0;
   animation: pulseColor 2000ms linear 100ms 2, pulseFont 2000ms linear 100ms 2;
 }
-.container404 .phone404error .phone404text {
+.phoneCustomerror .phoneErrortext {
   font-size: 5rem;
   margin: 0 0 40px 0;
+}
+
+.container404 {
+  text-align: center;
 }
 .container404 .svg404 {
   width: 31.25rem;
@@ -3320,111 +3449,7 @@ h5 {
   animation: out 2s infinite ease-out;
   fill: #e8dcb5;
 }
-.container404 .message404 {
-  color: #e8dcb5;
-}
-.container404 .message404:after {
-  content: "]";
-}
-.container404 .message404:before {
-  content: "[";
-}
-.container404 .message404:after, .container404 .message404:before {
-  color: #e8dcb5;
-  font-size: 1.25rem;
-  -webkit-animation-name: opacity;
-  -webkit-animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-name: opacity;
-  animation-name: opacity;
-  -webkit-animation-duration: 2s;
-  animation-duration: 2s;
-  -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
-  margin: 0 50px;
-}
-.container404 .text404 {
-  margin-top: 2rem;
-  font-size: 1.5rem;
-  color: #C19770;
-}
-.container404 .text404 .link404 {
-  color: #e8dcb5;
-  animation: pulseColor 1800ms linear 100ms 1;
-}
 
-@-webkit-keyframes opacity {
-  0%, 100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-@keyframes opacity {
-  0%, 100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-@keyframes out {
-  0% {
-    r: 1;
-    opacity: 0.9;
-  }
-  25% {
-    r: 5;
-    opacity: 0.3;
-  }
-  50% {
-    r: 10;
-    opacity: 0.2;
-  }
-  75% {
-    r: 15;
-    opacity: 0.1;
-  }
-  100% {
-    r: 20;
-    opacity: 0;
-  }
-}
-@keyframes pulseColor {
-  0% {
-    color: #e8dcb5;
-  }
-  25% {
-    color: #644936;
-  }
-  50% {
-    color: #e8dcb5;
-  }
-  75% {
-    color: #644936;
-  }
-  100% {
-    color: #e8dcb5;
-  }
-}
-@keyframes pulseFont {
-  0% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(0.9);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  75% {
-    transform: scale(0.9);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 @media (max-width: 1366px) {
   .mainBox404 {
     margin-top: -35px;
@@ -3435,16 +3460,73 @@ h5 {
     display: none;
   }
 
-  .container404 .phone404error {
+  .container404 .phoneCustomerror {
     display: block;
   }
-  .container404 .text404 {
-    font-size: 1rem;
-  }
-  .container404 .message404:after, .container404 .message404:before {
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    margin: 0 20px;
+}
+/** SCSS function to return a colour from a list, in hexidecimal or rgba value
+ * @param name: key used in the $colors list associated with a hexadecimal colour
+ * @param opacity: opacity value [0, 100] to be used by the rgba() colour; hex (default) to get the solid colour in hexadecimal value
+**/
+.error500box {
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  color: #D5B895;
+  background: #314848;
+}
+
+h1 {
+  --distance: .01em;
+  --dist-factor: 1;
+  position: relative;
+  display: block;
+  margin: 0;
+  font-size: 15vmax;
+  font-weight: normal;
+  font-family: monospace;
+  line-height: 1;
+  color: #dfcaa5;
+  filter: saturate(150%);
+}
+h1 > [data-overlay] {
+  position: relative;
+}
+h1 > [data-overlay]::after {
+  --dist-factor: 32;
+  content: attr(data-overlay);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #C19770;
+  font-size: 0.125em;
+}
+h1, h1::after,
+h1 [data-overlay]::after {
+  backface-visibility: hidden;
+  animation: animText 3s linear infinite;
+}
+h1::after {
+  --dist-factor: 2;
+  content: attr(data-txt);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #dfcaa5;
+  mix-blend-mode: screen;
+}
+h1::after, h1 [data-overlay]:first-child::after {
+  animation-direction: reverse;
+}
+
+@media (max-width: 1366px) {
+  .error500box {
+    margin-top: -35px;
   }
 }
 

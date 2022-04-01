@@ -9,6 +9,57 @@
 
 
 {% block content %}
+<!-- <div class="mainBox404">
+    <div class="container404">
+      
+      <span class="phoneCustomerror">
+          <p class="phoneErrorcode">500</p>
+          <p class="phoneErrortext ">ERROR</p>
+      </span>
+  
+  
+      <h1 class="h1500">5</h1>
+      <h1 class="h1500">00</h1>
+      <div class="box500">
+          <span></span><span></span>
+          <span></span><span></span>
+          <span></span>
+      </div>
+      <div class="box500">
+          <span></span><span></span>
+          <span></span><span></span>
+          <span></span>
+      </div>
+    
+      <div class="message404">
+        Internal Server Error
+      </div>
+  
+      <p class="text404">We're unable to find out what is happening! We suggest you to 
+        <a class="link404" href="{% url 'store:home' %}">go Home</a>
+        or visit later. 
+      </p>
+    </div>
+  
+  </div> -->
 
+<div class="error500box">
+
+  <h1 data-txt="5⬡⬡" aria-label="Internal Server Error">5<span>⬡</span><span>⬡</span></h1>
+  
+  <div class="errorBracketText">
+    Internal Server Error
+  </div>
+  
+  <p class="errorCodeP">
+    We're unable to find out what is happening! We suggest you to 
+    <a class="errorCodeLink" href="{% url 'store:home' %}">go Home</a>
+    or visit later. 
+  </p>
+  
+</div>
+
+ 
+  
  
 {% endblock %}
