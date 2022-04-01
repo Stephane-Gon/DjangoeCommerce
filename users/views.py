@@ -169,7 +169,7 @@ def activate_view(request, uidb64, token):
 
         # ============== QUANDO ESTIVER ONLINE TROCAR AQUI O "domain=";
         response = render(request, 'users/verified_email.html', context)
-        response.delete_cookie('cart', domain='127.0.0.1')
+        response.delete_cookie('cart', domain='joaolina.herokuapp.com')
     else:
         context = {
             'message' : 'Activation link is invalid!',
