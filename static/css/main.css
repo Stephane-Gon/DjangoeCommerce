@@ -3296,6 +3296,7 @@ h5 {
   font-size: 10rem;
   font-weight: 600;
   margin: 0;
+  animation: pulseColor 2000ms linear 100ms 2, pulseFont 2000ms linear 100ms 2;
 }
 .container404 .phone404error .phone404text {
   font-size: 5rem;
@@ -3349,8 +3350,7 @@ h5 {
 }
 .container404 .text404 .link404 {
   color: #e8dcb5;
-  animation: pulseColor 1800ms linear 3100ms forwards;
-  animation-delay: 100ms;
+  animation: pulseColor 1800ms linear 100ms 1;
 }
 
 @-webkit-keyframes opacity {
@@ -3406,6 +3406,23 @@ h5 {
   }
   100% {
     color: #e8dcb5;
+  }
+}
+@keyframes pulseFont {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  75% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 @media (max-width: 1366px) {
