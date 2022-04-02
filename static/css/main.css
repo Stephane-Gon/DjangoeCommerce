@@ -2046,10 +2046,24 @@ h5 {
 }
 .aboutHeroImgs {
   display: flex;
-  height: 47vh;
+  height: 50vh;
 }
-.aboutHeroImgs img {
-  width: 50%;
+.aboutHeroImgs div {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+.aboutHeroImgs.aboutHeroImgs1 div:nth-child(1) {
+  background-image: url("../img/photos/almofada-amarela.jpg");
+}
+.aboutHeroImgs.aboutHeroImgs1 div:nth-child(2) {
+  background-image: url("../img/photos/saco-branco.jpg");
+}
+.aboutHeroImgs.aboutHeroImgs2 div:nth-child(1) {
+  background-image: url("../img/photos/varias-almofadas.jpg");
+}
+.aboutHeroImgs.aboutHeroImgs2 div:nth-child(2) {
+  background-image: url("../img/photos/saco-palha.jpg");
 }
 
 .aboutContainer {
@@ -2118,6 +2132,22 @@ h5 {
   }
   .aboutContainer .myBtnPri {
     width: 40%;
+  }
+}
+@media (max-width: 950px) {
+  .aboutHeroImgs {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+  }
+  .aboutHeroImgs.aboutHeroImgs1 {
+    background-image: url("../img/photos/almofada-amarela.jpg");
+  }
+  .aboutHeroImgs.aboutHeroImgs2 {
+    background-image: url("../img/photos/varias-almofadas.jpg");
+  }
+  .aboutHeroImgs div {
+    display: none;
   }
 }
 @media (max-width: 768px) {
