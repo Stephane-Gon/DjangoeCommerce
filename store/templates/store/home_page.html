@@ -71,7 +71,9 @@ Home Page
         <div>
             <div class="product-card">
                 <a href="{{ item.get_absolute_url }}">
-                    <img src="{{ item.main_image.url }}" alt="Category Image">
+                    <div class="card-img-box">
+                        <img src="{{ item.main_image.url }}" alt="Category Image">
+                    </div>
                     <div class="card-text">
                         <h2>{{ item.categorie }}</h2>
                         <h3>{{ item.title }}</h3>
