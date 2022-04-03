@@ -128,6 +128,16 @@ if (urlName === 'home' || urlName === 'about'){
    
 }
 
+if (urlName === 'home' || urlName === 'product'){
+    let cardImgBox = document.querySelectorAll('.card-img-box')
+
+    for(let i= 0; i < cardImgBox.length; i++) {
+        let imgUrl = cardImgBox[i].dataset.img
+        cardImgBox[i].style.backgroundImage = `url("${imgUrl}")`
+    }
+   
+}
+
 if (urlName === 'gallery') {
     let images = document.querySelectorAll('img')
     helper.sendImgUrl(images)

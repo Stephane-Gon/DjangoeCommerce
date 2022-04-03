@@ -71,8 +71,7 @@ Home Page
         <div>
             <div class="product-card">
                 <a href="{{ item.get_absolute_url }}">
-                    <div class="card-img-box">
-                        <img src="{{ item.main_image.url }}" alt="Category Image">
+                    <div class="card-img-box" data-img="{{ item.main_image.url }}">
                     </div>
                     <div class="card-text">
                         <h2>{{ item.categorie }}</h2>
@@ -202,18 +201,17 @@ Home Page
                 slidesToScroll: 1,
                 itemWidth: 150,
                 duration: 0.25,
-                draggable: true,
             }
         }, {
             breakpoint: 768,
             settings: {
-                slidesToShow: 2,
-                draggable: false,
+                slidesToShow: 3,
             }
         }, {
             breakpoint: 1366,
             settings: {
                 slidesToShow: 3,
+                draggable: false,
             }
         }]
     })
