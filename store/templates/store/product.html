@@ -282,8 +282,9 @@ Product: {{ item.title }}
         <h1 class="mainHeading">More products like this one:</h1>
         <div class="card-slider">
         {% for item in moreItems %}
-            <a href="{{ item.get_absolute_url }}">
-                <div class="product-card">
+            
+            <div class="product-card">
+                <a href="{{ item.get_absolute_url }}">
                     <div class="card-img-box">
                         <img src="{{ item.main_image.url }}" alt="Category Image">
                     </div>
@@ -308,8 +309,8 @@ Product: {{ item.title }}
                             <h3 class="card-price">{{ item.get_discount_price }}€/UND</h3>
                         </div>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         {% endfor %}
         </div>
     {% endif %}
