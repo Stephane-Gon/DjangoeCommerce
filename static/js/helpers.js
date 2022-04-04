@@ -179,8 +179,8 @@ export function changeMyLabel(inputs, color1, color2) {
 
 // FUNCTION TO CLOSE THE MESSAGES
 export function messagesExit(icon, wrapper){
-    icon.addEventListener('click', () => {
-        wrapper.style.display = 'None'
+    window.addEventListener('click', (event) => {
+        if (event.target != wrapper && event.target != wrapper.firstElementChild) wrapper.style.display = 'None'
     })
 }
 

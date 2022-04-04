@@ -2695,6 +2695,11 @@ h5 {
   width: 28.5%;
 }
 
+.refund-modalBg .product-modal .refund-form .contactInput {
+  width: 90%;
+  margin: 0 auto;
+}
+
 @media (max-width: 1366px) {
   .product-hero {
     width: 100%;
