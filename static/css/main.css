@@ -865,6 +865,10 @@ h5 {
     padding-left: 0px;
     padding-right: 0px;
   }
+
+  .profile-wrapper {
+    padding: 0;
+  }
 }
 .info-ruller {
   height: 3px;
