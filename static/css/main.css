@@ -516,6 +516,7 @@ form .btnSecBack .myBtnSec {
 }
 @media (max-width: 768px) {
   .accountForm {
+    padding: 0;
     grid-template-columns: 100%;
   }
   .accountForm .form-group:nth-child(n) {
