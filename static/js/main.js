@@ -137,6 +137,14 @@ if (urlName === 'home' || urlName === 'product'){
     }
    
 }
+if(urlName === 'home') {
+    let catImgBox = document.querySelectorAll('.cat-img-box')
+
+    for(let i= 0; i < catImgBox.length; i++) {
+        let imgUrl = catImgBox[i].dataset.img
+        catImgBox[i].style.backgroundImage = `url("${imgUrl}")`
+    }
+}
 
 if (urlName === 'gallery') {
     let images = document.querySelectorAll('img')

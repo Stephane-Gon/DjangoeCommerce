@@ -1918,8 +1918,6 @@ h5 {
 }
 .home-wrapper .singleSlideWrapper {
   position: relative;
-  width: 33%;
-  height: 330px;
 }
 .home-wrapper .singleSlideWrapper h3 {
   position: absolute;
@@ -1927,9 +1925,11 @@ h5 {
   bottom: 5%;
   left: 5%;
 }
-.home-wrapper .singleSlideWrapper img {
-  width: 99%;
+.home-wrapper .singleSlideWrapper .cat-img-box {
+  background-position: center center;
+  background-size: cover;
   height: 330px;
+  width: 99%;
 }
 .home-wrapper .card-slider {
   padding-left: 35px;

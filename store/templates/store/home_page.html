@@ -36,7 +36,8 @@ Home Page
         <div class="singleSlideWrapper">
             <a href="{{ cat.get_absolute_url }}">
                 <h3 class="cardTitle">{{ cat.categorie }}</h3>
-                <img src="{{ cat.image.url }}" alt="Category Image">
+                <div class="cat-img-box" data-img="{{ cat.image.url }}">
+                </div>
             </a>
         </div>
         {% endfor %}
