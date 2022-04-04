@@ -859,8 +859,7 @@ h5 {
   .categories-wrapper {
     grid-template-columns: 1fr;
   }
-}
-@media (max-width: 768px) {
+
   .main-container {
     padding-left: 0px;
     padding-right: 0px;
@@ -3022,11 +3021,11 @@ h5 {
 
 @media (max-width: 1366px) {
   .checkout-container {
-    width: 100%;
+    width: 95%;
   }
 
   .checkout-bil-wrapper {
-    width: 95%;
+    width: 100%;
     margin: 0 auto;
   }
 }
