@@ -860,6 +860,12 @@ h5 {
     grid-template-columns: 1fr;
   }
 }
+@media (max-width: 768px) {
+  .main-container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
 .info-ruller {
   height: 3px;
   margin: 5px 0px 15px 0px;
