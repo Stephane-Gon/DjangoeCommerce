@@ -205,8 +205,8 @@ export function userAccount(links, wrappers, marker, pag=null, display='flex') {
                     
                 }
             }
-
             links[i].classList.add('active-link')
+
             if(wrappers[i].classList.contains('checkout-bil-wrapper')){
                 wrappers[i].style.display = 'flex'
             }
@@ -229,6 +229,7 @@ export function userAccount(links, wrappers, marker, pag=null, display='flex') {
 export function profileRedirect(links, wrappers, marker) {
     window.addEventListener('load', () => {
         let profileCookie = cookies.getCookie('profileCookie')
+        if (profileCookie === undefined || profileCookie === null) return
 
         let link
         if(profileCookie === 'userInfoLink'){
