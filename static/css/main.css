@@ -2138,7 +2138,7 @@ h5 {
     width: 50%;
   }
   .aboutContainer .myBtnPri {
-    width: 40%;
+    width: 30%;
   }
 }
 @media (max-width: 950px) {
@@ -2160,6 +2160,9 @@ h5 {
 @media (max-width: 768px) {
   .aboutContainer .socialInfo, .aboutContainer h2, .aboutContainer h4, .aboutContainer p {
     width: 90%;
+  }
+  .aboutContainer .myBtnPri {
+    width: 50%;
   }
 }
 @media (max-width: 500px) {
