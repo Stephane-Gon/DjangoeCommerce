@@ -2006,12 +2006,11 @@ h5 {
   border-radius: 0px 10px 10px 0px;
 }
 
-@media (max-width: 1366px) {
+@media (max-width: 768px) {
   .glider-prev, .glider-next {
     display: none;
   }
-}
-@media (max-width: 768px) {
+
   .home-wrapper .about-container .about-text {
     width: 100%;
     border-radius: 10px;
@@ -2496,12 +2495,12 @@ h5 {
   width: 80%;
   overflow-x: hidden;
 }
-.product-hero .product-slider-wrapper .product-prev {
+.product-hero .product-slider-wrapper .glider-prev {
   position: absolute;
   left: 5%;
   bottom: 50%;
 }
-.product-hero .product-slider-wrapper .product-next {
+.product-hero .product-slider-wrapper .glider-next {
   position: absolute;
   right: 5%;
   bottom: 50%;
@@ -2715,10 +2714,6 @@ h5 {
 @media (max-width: 1000px) {
   .product-hero .product-slider-wrapper {
     width: 60%;
-  }
-  .product-hero .product-slider-wrapper .product-prev,
-.product-hero .product-slider-wrapper .product-next {
-    display: none;
   }
   .product-hero .product-info {
     width: 40%;

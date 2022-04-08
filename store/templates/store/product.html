@@ -11,7 +11,7 @@ Product: {{ item.title }}
 <div class="product-hero">
     {% if images|length > 1 %}
         <div class="product-slider-wrapper glider-contain multiple" slider-active="true">
-            <button class="product-prev">
+            <button class="glider-prev">
                 <i class="fa fa-chevron-left"></i>
             </button>
 
@@ -21,7 +21,7 @@ Product: {{ item.title }}
                 {% endfor %}
             </div>
 
-            <button class="product-next">
+            <button class="glider-next">
                 <i class="fa fa-chevron-right"></i>
             </button>
         </div>
@@ -373,8 +373,8 @@ Product: {{ item.title }}
                 slidesToScroll: 1,
                 draggable: true,
                 arrows: {
-                    prev: '.product-prev',
-                    next: '.product-next'
+                    prev: '.glider-prev',
+                    next: '.glider-next'
                 },responsive: [{
                     breakpoint: 1366,
                     settings: {
