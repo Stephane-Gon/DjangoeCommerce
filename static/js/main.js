@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // HERE I GIVE FUNCTIONALITY TO THE MESSAGES POP UP
     let msgWrapper = document.getElementById('messages')
     if(msgWrapper.innerText != '') {
-        let icon = document.getElementById('messagesExitIcon')
-        helper.messagesExit(icon, msgWrapper)
+        helper.messagesExit(msgWrapper)
     }
 
     // HERE I STORE A COOKIE WITH THE USER VIEWPORT
@@ -25,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     
     let prefExitIcon = document.getElementById('cookiePrefExitIcon')
-    helper.messagesExit(prefExitIcon, cookiePrefWrapper)
+    helper.closeCookieConsent(prefExitIcon, cookiePrefWrapper)
     cookie.cookieConsent()
 
     // HERE I CALL THE BURGER MENU FUNCTION
@@ -261,8 +260,7 @@ if (urlName === 'order-details' ) {
 						  <i class="fas fa-times" id="messagesExitIcon" aria-hidden="true">`
 	        messages.style.display = 'flex'
 
-            let icon = document.getElementById('messagesExitIcon')
-	        helper.messagesExit(icon, messages)
+	        helper.messagesExit(messages)
         }
         else if(refundImg.files.length < document.getElementById('refund-quantity').value) {
             // HERE I DELETE THE FILES FROM THE INPUT
@@ -273,8 +271,7 @@ if (urlName === 'order-details' ) {
 						  <i class="fas fa-times" id="messagesExitIcon" aria-hidden="true">`
 	        messages.style.display = 'flex'
 
-            let icon = document.getElementById('messagesExitIcon')
-	        helper.messagesExit(icon, messages)
+	        helper.messagesExit(messages)
         }
     })
 
