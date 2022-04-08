@@ -224,7 +224,7 @@ input:focus, textarea:focus, select:focus, button:focus {
   border: 0.2em solid whitesmoke;
 }
 
-@media (max-width: 1366px) {
+@media (max-width: 768px) {
   ::-webkit-scrollbar {
     display: none;
   }
