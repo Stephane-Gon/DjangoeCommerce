@@ -2496,12 +2496,12 @@ h5 {
   width: 80%;
   overflow-x: hidden;
 }
-.product-hero .product-slider-wrapper .glider-prev {
+.product-hero .product-slider-wrapper .product-prev {
   position: absolute;
   left: 5%;
   bottom: 50%;
 }
-.product-hero .product-slider-wrapper .glider-next {
+.product-hero .product-slider-wrapper .product-next {
   position: absolute;
   right: 5%;
   bottom: 50%;
@@ -2704,9 +2704,6 @@ h5 {
   .product-hero {
     width: 100%;
   }
-  .product-hero .product-slider-wrapper .product-slide {
-    width: 90%;
-  }
   .product-hero .error-product-slider {
     width: 95%;
   }
@@ -2718,6 +2715,10 @@ h5 {
 @media (max-width: 1000px) {
   .product-hero .product-slider-wrapper {
     width: 60%;
+  }
+  .product-hero .product-slider-wrapper .product-prev,
+.product-hero .product-slider-wrapper .product-next {
+    display: none;
   }
   .product-hero .product-info {
     width: 40%;
