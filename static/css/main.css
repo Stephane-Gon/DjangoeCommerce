@@ -2704,10 +2704,6 @@ h5 {
   .product-hero {
     width: 100%;
   }
-  .product-hero .product-slider-wrapper .glider-prev,
-.product-hero .product-slider-wrapper .glider-next {
-    display: none;
-  }
   .product-hero .product-slider-wrapper .product-slide {
     width: 90%;
   }
