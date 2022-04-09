@@ -198,7 +198,6 @@ export function userAccount(links, wrappers, marker, pag=null, display='flex') {
     function indicator(e) {
         // HERE I DO THIS IF STATEMENT IN CASE THE USER TRANSLATES THE PAGE
         if(e.nodeName === 'FONT') return marker.style.left = e.parentNode.parentNode.offsetLeft + 'px'
-        console.log('Helo')
         return marker.style.left = e.offsetLeft + 'px'
     }
 
