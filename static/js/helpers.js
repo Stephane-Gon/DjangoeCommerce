@@ -196,14 +196,18 @@ export function userAccount(links, wrappers, marker, pag=null, display='flex') {
 
     // FUNCTION TO MOVE AN ELEMENT TO A DETERMINATED PLACE
     function indicator(e) {
-        marker.style.left = e.offsetLeft + 'px'
+        // HERE I DO THIS IF STATEMENT IN CASE THE USER TRANSLATES THE PAGE
+        if(e.nodeName === 'FONT') return marker.style.left = e.parentNode.parentNode.offsetLeft + 'px'
+        
+        return marker.style.left = e.offsetLeft + 'px'
     }
 
     for (let i=0; i < links.length; i++) {
 
         links[i].addEventListener('click', (e) => {
-    
+            
             indicator(e.target)
+
             for(let j=0; j < links.length; j ++) {
 
                 if( links[j].classList.contains('active-link')) {
