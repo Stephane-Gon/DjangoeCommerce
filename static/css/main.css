@@ -1746,6 +1746,9 @@ h5 {
   border: 1px solid #644936;
   width: 90%;
 }
+.overlay .overlay-left .requirementsList {
+  display: none;
+}
 
 @media (max-width: 1366px) {
   .requirementsList, .passwordErrorWrapper {

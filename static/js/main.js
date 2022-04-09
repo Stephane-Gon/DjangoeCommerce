@@ -50,7 +50,6 @@ if(urlName === 'login' || urlName === 'register') {
         }
     }
 
-
     signUpBtn.addEventListener('click', () => {
         if(document.documentElement.clientWidth < 768) {
             container.classList.add('top-panel-active')
@@ -73,8 +72,12 @@ if(urlName === 'login' || urlName === 'register') {
     helper.changeMyLabel(inputs, '#C19770', '#644936')
     let pass1Input = inputs[3]
     let pass2Input = inputs[4]
-    helper.registerErrorCheck(pass1Input, pass2Input) // DESATIVEI PORQUE NÃO FÁZ NADA
+    helper.registerErrorCheck(pass1Input, pass2Input)
 
+    const passList = document.querySelector('.requirementsList')
+    pass1Input.addEventListener('focus', () => {
+        passList.style.display = 'block'
+    })
 }
 
 
