@@ -22,7 +22,12 @@
 
     <!--Django Countries Flags-->
     <link rel="stylesheet" href="{% static 'flags/sprite.css' %}">
-
+    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+    <script>
+        Weglot.initialize({
+            api_key: 'wg_523de41150eef9c595d3d487b2c2b8335'
+        });
+    </script>
     <script>
         // THIS IS A VARIABLE SO I CAN NOW IF THE USER IS LOGGED IN OR NOT
         let user = '{{ request.user }}'
