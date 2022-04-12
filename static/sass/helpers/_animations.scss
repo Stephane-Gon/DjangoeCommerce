@@ -1,0 +1,66 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+@-webkit-keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes opacity {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes out {
+  0% {r:1;  opacity: 0.9 ;}
+  25%{r:5;  opacity: 0.3 ;}
+  50%{r:10; opacity: 0.2 ;}
+  75%{r:15; opacity:0.1;}
+ 	100% {r:20;opacity:0;}
+}
+
+@keyframes pulseColor {
+	0% { color: $dutchWhite; }
+	25% { color: $coffe; }
+	50% { color: $dutchWhite; }
+	75% { color: $coffe; }
+	100% { color: $dutchWhite; }
+}
+
+@keyframes pulseFont {
+	0% { transform: scale(1); }
+	25% { transform: scale(0.9); }
+	50% { transform: scale(1.1); }
+	75% { transform: scale(0.9); }
+	100% { transform: scale(1); }
+}
+
+
+@keyframes animText {
+  0% {
+    transform:
+      rotate(0deg)
+      translate(
+        calc(var(--distance) * -1 * var(--dist-factor)),
+        calc(var(--distance) * -1 * var(--dist-factor))
+      )
+      rotate(0deg);
+  }
+  100% {
+    transform:
+      rotate(360deg)
+      translate(
+        calc(var(--distance) * -1 * var(--dist-factor)),
+        calc(var(--distance) * -1 * var(--dist-factor))
+      )
+      rotate(-360deg);
+  }
+}

@@ -1,0 +1,10 @@
+@use './variables' as *;
+
+@function set-color($color) {
+    @if (lightness($color) > 40) {
+      @return $coffe;
+    }
+    @else {
+      @return $dutchWhite;
+    }
+}

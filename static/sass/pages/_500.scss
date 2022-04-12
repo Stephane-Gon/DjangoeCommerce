@@ -1,0 +1,103 @@
+@use '../helpers'as *;
+@use '../basics'as *;
+@use '../layout'as *;
+
+$colors: (
+    main: $dutchWhite,
+    comp: $dutchWhite,
+    glow: $camel,
+    kitt: $coffe,
+    z: $tan,
+    m: #686868,
+    a: #161616
+);
+
+/** SCSS function to return a colour from a list, in hexidecimal or rgba value
+ * @param name: key used in the $colors list associated with a hexadecimal colour
+ * @param opacity: opacity value [0, 100] to be used by the rgba() colour; hex (default) to get the solid colour in hexadecimal value
+**/
+@function color($name, $opacity: hex) {
+    @if map-has-key($colors, $name) { // If the colour exists in the list…
+        @if $opacity != hex { // …return RGBA value
+            $opacity-decimal: $opacity/100;
+            @return rgba(map-get($colors, $name), $opacity-decimal);
+        }
+        @else { // …returns hexidecimal value
+            @return map-get($colors, $name);
+        }
+    }
+    @else { // Return a CSS colour keyword in case it exists
+        @return unquote($name);
+    }
+}
+
+.error500box {
+	height: 100vh;
+	@extend %columnFlex;
+  overflow: hidden;
+  margin: 0;
+  color: color(z);
+  background: $darkSlate;
+}
+
+.error500code {
+  --distance: .01em;
+  --dist-factor: 1;
+  position: relative;
+  display: block;
+  margin: 0;
+  font-size: 15vmax;
+  font-weight: normal;
+  font-family: monospace;
+  line-height: 1;
+  color: mix(color(comp), color(z));
+  filter: saturate(150%);
+  
+  > [data-overlay] {
+    position: relative;
+    
+    &::after {
+      --dist-factor: 32;
+      content: attr(data-overlay);
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      color: color(glow);
+      font-size: .125em;
+    }
+  }
+  
+  &,
+  &::after,
+  [data-overlay]::after {
+    backface-visibility: hidden;
+    animation: animText 3s linear infinite;
+  }
+  
+  &::after {
+    --dist-factor: 2;
+    content: attr(data-txt);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: mix(color(main), color(z));
+    mix-blend-mode: screen;
+  }
+  
+  &::after, [data-overlay]:first-child::after {
+    animation-direction: reverse;
+  }
+}
+
+
+@include media("<=desktop") {
+  .error500box {
+    margin-top: -35px;
+  }
+}
+

@@ -1,0 +1,55 @@
+@use '../helpers' as *;
+
+.userOrders-table{
+    background-color: #e8dcb5af;
+    border-spacing: 5px 5px; 
+    border-collapse: collapse; 
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 40px;
+
+    thead {
+        border-bottom: 2px solid $coffe;
+        tr {
+            
+            .head-td{
+                @include text(1.3rem, 600, none, $coffe);
+            }
+            .ruller-td {
+                display: inline-block;
+                position: relative;
+                @include ruller($coffe);
+                a {
+                    color: $camel;
+                    text-decoration: none;
+                }
+            }
+        }
+        .head-divider {
+            border-bottom: 1px solid $coffe;
+            padding-bottom: 10px;
+
+            td {
+                padding-bottom: 15px;
+            }
+        }
+    }
+
+    tbody {
+        border-spacing: 5px 5px; 
+
+        tr {
+            border-bottom: 1px solid $coffe;
+            font-size: 1.3rem;
+            a{
+                text-decoration: none;
+                color: $coffe;
+            }
+
+            .orderItem-img {
+                width: 120px;
+                aspect-ratio: 1;
+            }
+        }
+    }
+}

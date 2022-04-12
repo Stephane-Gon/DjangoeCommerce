@@ -1,0 +1,79 @@
+@use '../helpers'as *;
+@use '../basics'as *;
+@use '../layout'as *;
+
+.st1{font-size:5.18rem;}
+.st2{fill:$dutchWhite;}
+
+.mainBox404 {
+  background-color: $darkSlate;
+  height: 100vh;
+  width: 100vw;
+  @include mainFlex(center);
+  
+}
+
+.phoneCustomerror {
+  color: $dutchWhite;
+  display: none;
+  @extend %columnFlex;
+
+  .phoneErrorcode {
+    font-size: 10rem;
+    font-weight: 600;
+    margin: 0;
+    animation: pulseColor 2000ms linear 100ms 2, 
+                pulseFont 2000ms linear 100ms 2;
+  }
+  .phoneErrortext {
+    font-size: 5rem;
+    margin: 0 0 40px 0;
+  }
+}
+
+.container404{
+  text-align:center;
+
+  .svg404 {
+    width: 31.25rem;
+    height: 25rem;
+    text-align: center;
+    fill: $tan;
+  
+    path#XMLID_5_ {
+  
+      fill: $dutchWhite;
+      filter: url(#blurFilter4);
+    }
+  
+    path#XMLID_11_,
+    path#XMLID_2_ {
+      fill: $dutchWhite;
+    }
+  
+    .circle {
+      animation: out 2s infinite ease-out;
+      fill: $dutchWhite;
+    }
+  }
+}
+
+
+@include media("<=desktop") {
+  .mainBox404 {
+    margin-top: -35px;
+  }
+}
+
+@include media("<=LGphone") {
+  .svg404 {
+    display: none;
+  }
+
+  .container404 {
+    .phoneCustomerror {
+      display: block;
+    }
+  } 
+  
+}

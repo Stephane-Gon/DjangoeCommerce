@@ -1,0 +1,62 @@
+@use '../basics' as *;
+@use '../helpers' as *;
+
+.my-footer {
+    background-color: $coffe;
+    height: fit-content;
+    width: 100%;
+    padding: 15px 0;
+    position:absolute;
+    bottom: 0;
+    @include mainFlex(space-around);
+    
+    .footer-brand {
+        @include mainFlex(center);
+
+        .logo {
+            height: 4rem;
+            width: auto;
+            margin: 0 15px;
+        }
+        .logoName {
+            height: 2.5rem;
+            width: auto;
+        }
+    }
+
+    .btnSecBack {
+
+
+        .myBtnSec {
+            background-color: $coffe;
+
+            a {
+                color: $dutchWhite;
+            }
+        }
+    }
+
+    .footer-Icons {
+        a {
+            text-decoration: none;
+
+            i {
+                color: $dutchWhite;
+                font-size: 1.7rem;
+                margin: 0 10px;
+            }
+        }
+        
+    }
+}
+
+@include media("<=tablet") {
+    .my-footer {
+        flex-direction: column;
+        margin-top: 100px;
+
+        div {
+            margin: 30px 0;
+        }
+    }
+}

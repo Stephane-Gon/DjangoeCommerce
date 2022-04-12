@@ -1,0 +1,115 @@
+@use '../helpers' as *;
+
+.align-h {
+    width: 100%;
+    text-align: center;
+}
+
+.errorMessageWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.passProfileErrors {
+        margin-top: 20px
+    }
+}
+.errorMessage {
+    @include text(1rem, 300, none, red);
+    margin-left: 5px;
+    list-style: none;
+    margin-top: 5px;
+}
+
+
+.messages {
+    width: 100%;
+    margin-top: 88px;
+    background-color: $dutchWhite;
+    position: absolute;
+    @include mainFlex(center);
+    @extend %shaddow;
+    border-radius: 10px;
+    z-index: 17;
+    .alert-success {
+        padding: 10px 0;
+        @include text(1.2rem, 400, italic, $coffe)
+    }
+
+    .alert-info {
+        padding: 10px 0;
+        @include text(1.2rem, 400, none, $coffe)
+    }
+
+    .alert-warning, .alert-error {
+        padding: 10px 0;
+        @include text(1.2rem, 600, none, rgb(238, 16, 16))
+    }
+
+    .fa-times {
+        color: $coffe;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        cursor: pointer;
+    }
+}
+
+.requirementsList li {
+    list-style:circle;
+}
+
+.passwordErrorWrapper h4 {
+    color: red;
+}
+
+a {
+    text-decoration-line: underline;
+    color: $dutchWhite;
+}
+.disabled-link {
+    background-color: #6449364d;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: auto;
+}
+
+.mySecLink {
+    color: $coffe;
+}
+.text-muted {
+    margin: 5px 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+h1, h2 {
+    font-family: $sec-font;
+}
+h2 {
+    font-weight: 400;
+}
+h5 {
+    font-size: 1rem;
+}
+.infoText {
+    @include text(1.6rem, 500, italic, black)
+}
+.cardTitle {
+    @include text(1.6rem, 600, none, $coffe)
+}
+.secHeader {
+    font-weight: 600;
+}
+.mainHeading {
+    @include text(2.5rem, 400, none, $coffe)
+}
+
+
+@include media("<=desktop") {
+    .messages {
+        top: -90px;
+    }
+    
+}

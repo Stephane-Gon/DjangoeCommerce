@@ -1,0 +1,67 @@
+@use '../helpers' as *;
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: relative;
+    min-height: 100vh;
+    font-family: $pri-font;
+    background: $platinum;
+    color: $coffe;
+}
+
+ul, ol{
+    text-align: start;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    width: fit-content;
+}
+input:focus, textarea:focus, select:focus, button:focus{
+    outline: none;
+}
+
+.logo {
+    height: 3rem;
+    width: auto;
+    margin: 0 15px;
+}
+
+.logoName {
+    height: 1.8rem;
+    width: auto;
+}
+.glider-prev, .glider-next {
+    cursor: pointer;
+}
+
+
+::-webkit-scrollbar {
+    width: 0.9em;
+}
+
+::-webkit-scrollbar-track {
+    background: whitesmoke;
+    border-radius: 100vw;
+    margin-block: .2em;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #644936dc;
+    border-radius: 100vw;
+    border: .2em solid whitesmoke;
+}
+
+@include media("<=tablet") {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
