@@ -23,8 +23,11 @@ My first functional eCommerce project
  5º AWS S3 buckets to store static and media files once the app was deployed;
     - Since heroku does not host media files I decided to store both static and media files
     on a bucket from AWS S3. This was also the first time I used this method and I found it quite useful;
+   
+ 6º I used Weglot to translate;
+   - I decided to use weglot to translate the website, since I wanted to know How would that work;
  
- 6º Heroku to host the app;
+ 7º Heroku to host the app;
    - Since this is not a really big project or company, I decided to go with a simple way of hosting so that
    the admin can easily monitor it;
    
