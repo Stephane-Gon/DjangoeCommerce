@@ -7,21 +7,21 @@ My first functional eCommerce project
  
  
  1º In this project I used Django for the backend;
-    - For the backend I had to install a few dependencies to deal with forms;
+   - For the backend I had to install a few dependencies to deal with forms;
     
  2º Vanilla JavaScript for the frontend;
-    - I went with vanilla Javascript so I could gain a little bit of more experience with it,
+   - I went with vanilla Javascript so I could gain a little bit of more experience with it,
     before I start using React;
  
  3º SASS for the styling;
-    - I used sass because I like the way it can be organized, making it easier to search for
+   - I used sass because I like the way it can be organized, making it easier to search for
     what I'm loking for;
     
  4º Paypal API to receive payments;
-    - For the first time I used paypal API that allows me to receive payments via paypal or credit card; 
+   - For the first time I used paypal API that allows me to receive payments via paypal or credit card; 
     
  5º AWS S3 buckets to store static and media files once the app was deployed;
-    - Since heroku does not host media files I decided to store both static and media files
+   - Since heroku does not host media files I decided to store both static and media files
     on a bucket from AWS S3. This was also the first time I used this method and I found it quite useful;
    
  6º I used Weglot to translate;
