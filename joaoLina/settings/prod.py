@@ -5,9 +5,9 @@ from decouple import config
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['joaolina.heroku.com', 'www.joaolina.heroku.com']
+ALLOWED_HOSTS = ['random.url.com']
 
 DATABASES = {
     'default': dj_database_url.config(default='sqlite3:///db.sqlite', conn_max_age=600)
