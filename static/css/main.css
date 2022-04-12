@@ -1493,6 +1493,42 @@ h5 {
   background: linear-gradient(to bottom, #C19770, #e8dcb5);
   align-self: center;
 }
+.my-navBar .logout-link {
+  align-self: center;
+  grid-column: 4/5;
+  font-family: "Courgette", cursive;
+  position: relative;
+  width: fit-content;
+}
+.my-navBar .logout-link :hover {
+  color: #C19770;
+}
+.my-navBar .logout-link ::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #C19770;
+  transform-origin: bottom right;
+  transition: transform cubic-bezier(0.17, 0.67, 0.83, 0.67) 0.3s;
+  transform: scaleX(0);
+}
+.my-navBar .logout-link :hover::before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.my-navBar .logout-link a {
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 400;
+  font-style: none;
+  color: #644936;
+}
+.my-navBar .logout-link a:hover {
+  color: #C19770;
+}
 
 .my-navBarNoUser {
   grid-template-columns: 20px 10% auto 20%;
@@ -1600,8 +1636,8 @@ h5 {
 .side-menu-user .myNavLinks .nav-item {
   margin: 20px 15px;
 }
-.side-menu-user .side-nav-btn-user {
-  background: linear-gradient(to right, #D5B895, #C19770);
+.side-menu-user .logout-link-phone {
+  margin-left: 15px;
 }
 .side-menu-user .myBtnSec {
   background: white;

@@ -40,9 +40,9 @@
             </div>
         </div>
 
-        <button class="myBtnPri navBtnUser">
-            <a class="mySecLink" href="{% url 'logout' %}">Log Out</a>
-        </button>
+        <li class="logout-link">
+            <a href="{% url 'logout' %}">Log Out</a>
+        </li>
     </nav>
 {% else %}
     <nav class="my-navBar my-navBarNoUser main-nav">
@@ -130,9 +130,9 @@
         </li>
     </ul>
     {% if request.user.is_authenticated %}
-        <button class="myBtnPri side-nav-btn-user">
-            <a class="mySecLink" href="{% url 'logout' %}">Log Out</a>
-        </button>
+        <li class="logout-link logout-link-phone">
+            <a href="{% url 'logout' %}">Log Out</a>
+        </li>
     {% else %}
         <div class="btnWrapperNoUser">
             <div class="btnSecBack">
