@@ -17,7 +17,7 @@ from .forms import ContactUsForm, AddReviewForm, OrderReplicaForm
 from .models import Categorie, Item, Image, Review, OrderItem, Address, Order, Transaction
 from users.forms import UserAddressInfoForm
 from joaoLina.helpers import cartData, createOrder, getUserWidth
-from joaoLina.settings.base import SHIPPING_PRICE
+from joaoLina.settings.base import SHIPPING_PRICE, PAYPAL_CLIENT_ID
 
 
 # THIS IS THE ABOUT VIEW
@@ -403,7 +403,8 @@ def checkout_view(request):
         'items' : items,
         'sForm' : userSForm,
         'bForm' : userBForm,
-        'userAddress': shippingAddress
+        'userAddress': shippingAddress,
+        'paypalId': PAYPAL_CLIENT_ID
     }
 
     if request.method == 'POST':
